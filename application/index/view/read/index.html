@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$book.book_name}</title>
+    <!--样式重置-->
+    <link rel="shortcut icon" href="__STATIC__/images/Favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="__STATIC__/read/css/rest.css" />
+    <!-- 阅读详情样式 -->
+    <link rel="stylesheet" href="__STATIC__/read/css/readDetails.css">
+    <link rel="stylesheet" href="__STATIC__/read/css/readDetailsSmall.css" media="screen and (max-width: 1400px)"/>
+    <link rel="stylesheet" href="__STATIC__/read/css/readDetail_night.css">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/read/css/footer.css"/>
+    <script src="https://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body >
+<div class="wrap">
+    <!-- 头部BEGIN -->
+    <div class="header ">
+        <div class="header-nav ">
+            <img src="__STATIC__/read/images/reader_slices/reader_shuddd_logo.png" alt=""  class="fl logo">
+            <p class="fl info">泛次元小说互动阅读平台</p>
+
+            <!-- 搜索登录模块 -->
+            <div class="header-search fr ">
+                <!-- 搜索部分BEGIN -->
+                <form action="" class="fl search">
+                    <input type="text" class="fl text" value="搜索更多作品或作者" />
+                    <i class="fr"></i>
+                </form>
+                <!-- 搜索部分END -->
+                <!-- 登录注册BEGIN -->
+                <p class="oh loginReg">
+                    <a href="javascript:;" class="fl login">登录</a>
+                    <span class="fl"></span>
+                    <a href="javascript:;" class="fl register">注册</a>
+                </p>
+                <!-- 登录注册BEGIN -->
+            </div>
+        </div>
+    </div>
+    <!-- 头部END -->
+    <!-- 导航 分类BEGIN-->
+    <p class="nav-list">
+        <a href="javascript:;">首页</a>
+        &gt;
+        <a href="javascript:;">排行</a>
+        &gt;
+        <a href="javascript:;">点击榜</a>
+        &gt;
+        <a href="javascript:;">崩坏的综漫之旅</a>
+    </p>
+    <!-- 导航 分类END-->
+    <!-- 中间内容部分BEGIN -->
+
+    <!-- 目录。详情 收藏 设置功能 BEGIN-->
+    <ul class=" set-list-left set-list" id="J_setLeft">
+        <li class="menu-set " id="J_menu" >
+            <i class="menu  "></i>
+            <span>目录</span>
+            <!-- 书籍卷列表 END -->
+        </li>
+        <li>
+            <i class="detail"></i>
+            <span>详情</span>
+        </li>
+        <li>
+            <i class="collect "></i>
+            <span>收藏</span>
+        </li>
+        <li class="bob setting " id="setup">
+            <i class="setup "></i>
+            <span>设置</span>
+        </li>
+        <div class="menu-wrap " id="wrap">
+            <em  class="close"></em>
+            <p class="book-list-title">目录</p>
+            <!-- 书籍卷列表 BEGIN -->
+            <div class="book-roll-wrap" id="book-wrap">
+                <div class="book-roll">
+                    {volist name="chapter"  id="vo"}
+                    <p class="roll-details">
+                        <span class="fl">{$vo.title}</span>
+                        <em class="select fr selected" ></em>
+                    </p>
+                    <ul class="oh chapter-list list show" >
+                       {volist name="$vo.chapter" id="v"}
+                        <li class="fl">
+                            <a href="javascript:;">
+                                <span class="fl">{$v.title}</span>
+                                {if condition="$v.the_price neq 0"}
+                                <em class="fl locking "></em>
+                                {/if}
+                            </a>
+                        </li>
+                        {/volist}
+                    </ul>
+
+                   {/volist}
+                </div>
+                <!-- 滚动条  BEGIN-->
+                <div class="book-scroll">
+                    <div class="bar"></div>
+                </div>
+                <!-- 滚动条  END-->
+            </div>
+        </div>
+        <!-- 设置 BEGIN -->
+        <div class="set-wrap">
+            <p class="oh col-set">
+                <span class="fl setup" >设置</span>
+                <em class="set-close fr"></em>
+            </p>
+            <!-- 阅读主题 BEGIN -->
+
+            <div class="read-motif lists  fl">
+                <span class="motif-title fl">阅读主题 ：</span>
+                <!-- 七中颜色 -->
+                <ul class="color-motif oh  fl maL  " id="J_theme">
+                    <li class=" col-white act" data-s="0"></li>
+                    <li class=" col-light"></li>
+                    <li class=" col-blue"></li>
+                    <li class=" col-gray"></li>
+                    <li class=" col-purple"></li>
+                    <li class=" col-pink"></li>
+                    <li class=" col-black " id="colBlack"></li>
+                </ul>
+            </div>
+            <!-- 阅读主题 END -->
+            <!-- 繁简切换 BEGIN-->
+            <div class="read-motif lists  fl ">
+                <span class="motif-title fl">繁简切换 ：</span>
+                <ul class="font-family oh  fl maL" id="J_tabs" >
+                    <li class="fl  act"  onclick="convert('s')" data-ss='0'>简体</li>
+                    <li class="fl "  onclick="convert('t')" >繁体</li>
+                </ul>
+            </div>
+            <!-- 繁简切换 END-->
+            <!-- 正文字体 BEGIN-->
+            <div class="read-motif lists  fl ">
+                <span class="motif-title fl">正文字体 ：</span>
+                <ul class="font-family oh  fl maL" id="J_tram">
+                    <li class="fl  act" data-st='0'>雅黑</li>
+                    <li class="fl " >宋体</li>
+                    <li class="fl ">楷体</li>
+                </ul>
+            </div>
+            <!-- 正文字体 END-->
+            <!-- 字体大小 BEGIN-->
+            <div class="read-motif lists  fl maD">
+                <span class="motif-title fl">字体 大小：</span>
+                <ul class="font-size oh  fl maL">
+                    <li class="fl  " data-str="0" >A-</li>
+                    <li class="fl default" id="txt" data-str="2">14</li>
+                    <li class="fl " data-str="3">A+</li>
+                </ul>
+            </div>
+            <!-- 字体大小 END-->
+            <!-- 设置保存按钮 -->
+            <div class="read-motif lists btns ">
+                <button class="save act" >保存</button>
+                <button class="cancel">取消</button>
+            </div>
+        </div>
+        <!-- 设置 END -->
+        <!-- 	<div></div> -->
+    </ul>
+    <!-- 目录。详情 收藏 设置功能 END-->
+    <!-- 推荐。月票 打赏 打赏 BEGIN-->
+    <ul class=" set-list-right set-list  " id="J_setRight">
+        <li>
+            <i class="recommend"></i>
+            <span>推荐</span>
+        </li>
+        <li>
+            <i class="ticket"></i>
+            <span>月票</span>
+        </li>
+        <li>
+            <i class="reward"></i>
+            <span>打赏</span>
+        </li>
+        <li class="bob">
+            <i class="download"></i>
+            <span>订阅</span>
+        </li>
+    </ul>
+    <!-- 目录。详情 收藏 设置功能 END-->
+    <!-- 内容部分BEGIN -->
+    <div class="content ">
+        <p class="chapterTitle">
+            第1章 新婚夜大战
+        </p>
+        <p class="bookInfo oh">
+            	 <span class="fl">
+             		小说：
+            	 {$book.book_name}
+         		</span>
+            <span class="fl">
+              	小说作者：
+             	<span class="col-red">{$book.author_name} </span></span>
+            <span class="fl">
+             	更新时间：
+            	 {$book.update_time}
+         		</span>
+            <span class="fl">
+              	书评：
+         		 1555
+      			</span>
+            <span class="fl ma0">
+              	字数：
+         		{$book.words}
+         	</span>
+        </p>
+
+        <!-- 小说正文部分BEGIN -->
+        <div class="wrapper" id="tt">
+            柳湘迷迷糊糊醒来，发现自己侧躺在冷冰冰的地上。
+            头痛欲裂，浑身没有一点力气，更不能动弹分毫。
+            汩汩入耳的，是男人和女人的调笑声。 还有一幅惨烈的图景，在她的脑海里浮现。
+            红色，刺目的红色，喧闹的喜乐，丰神俊朗却又面露鄙夷的年轻男子。 还有一个媚眼如丝的女人，与那男人一边调笑，一边冷眼看着一袭红色的身影，轰然撞向坚硬的红木桌角。
+            霎时鲜血四溅，整个世界，沉寂了……
+            柳湘记得自己跌入了悬崖，为何醒来想到的，竟是这些？
+            她记得，相恋多年的男友勾搭上了富家女，为了扫除她这个“障碍”，将她推下了悬崖。 好像，她才看清了他的真面目，都还没来得及恨他，就已经死了。
+            既然死了，怎么又会来了这里？
+            难道是——
+            当“穿越”二字在她的思维中划过，柳湘感觉自己像是被一道惊雷劈到了一样。
+            待记忆慢慢归位，又恢复了些许体力，她睁开眼睛。
+            入目看到的，是两个人，一男一女，都穿着大红色的古装，像是一对新婚的夫妻。 但那女人却衣衫不整，香肩裸露，莲藕般嫩白的手臂，如同藤蔓一样，缠绕在男人的脖颈上。
+            这两人一边笑着，一边看她，见她醒了，面上皆露出鄙夷之色。
+            柳湘也跟着笑了，那笑里，满是嘲讽。
+            呵，这便是她的新婚之夜。
+            呵，这便是她的夫君，司空紫阳。
+            当看到这一对男女的时候，那些涌入她脑海的记忆，让她明白了刚刚发生过什么事，也让她接受了自己已然穿越的事实。
+            然而穿越这件事，还是没有眼前这番景象带给她的冲击大。 洞房花烛夜，本该红烛照影，你侬我侬，但那新婚的夫君，竟然当着妻子的面，狎妓淫乱，逼她自尽。
+            渣男，全都是渣男！ 为这等渣男，柳湘着实觉的那女子死的太不值。 好在她自己并不是为了渣男而寻死的，如若不然，只怕她死了都要被自己气活。
+            既然她现在占了人家的身体，那就势必要让她活的痛快，不能这么窝囊。 不单单是为了那个死去的女子，也是为了她自己，前世没来得及讨要的，这辈子一并要回来。
+            柳湘迷迷糊糊醒来，发现自己侧躺在冷冰冰的地上。
+            头痛欲裂，浑身没有一点力气，更不能动弹分毫。
+            汩汩入耳的，是男人和女人的调笑声。 还有一幅惨烈的图景，在她的脑海里浮现。
+            红色，刺目的红色，喧闹的喜乐，丰神俊朗却又面露鄙夷的年轻男子。 还有一个媚眼如丝的女人，与那男人一边调笑，一边冷眼看着一袭红色的身影，轰然撞向坚硬的红木桌角。
+            霎时鲜血四溅，整个世界，沉寂了……
+            柳湘记得自己跌入了悬崖，为何醒来想到的，竟是这些？
+            她记得，相恋多年的男友勾搭上了富家女，为了扫除她这个“障碍”，将她推下了悬崖。 好像，她才看清了他的真面目，都还没来得及恨他，就已经死了。
+            既然死了，怎么又会来了这里？
+            难道是——
+            当“穿越”二字在她的思维中划过，柳湘感觉自己像是被一道惊雷劈到了一样。
+            待记忆慢慢归位，又恢复了些许体力，她睁开眼睛。
+            入目看到的，是两个人，一男一女，都穿着大红色的古装，像是一对新婚的夫妻。 但那女人却衣衫不整，香肩裸露，莲藕般嫩白的手臂，如同藤蔓一样，缠绕在男人的脖颈上。
+            这两人一边笑着，一边看她，见她醒了，面上皆露出鄙夷之色。
+            柳湘也跟着笑了，那笑里，满是嘲讽。
+            呵，这便是她的新婚之夜。
+            呵，这便是她的夫君，司空紫阳。
+            当看到这一对男女的时候，那些涌入她脑海的记忆，让她明白了刚刚发生过什么事，也让她接受了自己已然穿越的事实。
+            然而穿越这件事，还是没有眼前这番景象带给她的冲击大。 洞房花烛夜，本该红烛照影，你侬我侬，但那新婚的夫君，竟然当着妻子的面，狎妓淫乱，逼她自尽。
+            渣男，全都是渣男！ 为这等渣男，柳湘着实觉的那女子死的太不值。 好在她自己并不是为了渣男而寻死的，如若不然，只怕她死了都要被自己气活。
+            既然她现在占了人家的身体，那就势必要让她活的痛快，不能这么窝囊。 不单单是为了那个死去的女子，也是为了她自己，前世没来得及讨要的，这辈子一并要回来。
+            柳湘迷迷糊糊醒来，发现自己侧躺在冷冰冰的地上。
+            头痛欲裂，浑身没有一点力气，更不能动弹分毫。
+            汩汩入耳的，是男人和女人的调笑声。 还有一幅惨烈的图景，在她的脑海里浮现。
+            红色，刺目的红色，喧闹的喜乐，丰神俊朗却又面露鄙夷的年轻男子。 还有一个媚眼如丝的女人，与那男人一边调笑，一边冷眼看着一袭红色的身影，轰然撞向坚硬的红木桌角。
+            霎时鲜血四溅，整个世界，沉寂了……
+            柳湘记得自己跌入了悬崖，为何醒来想到的，竟是这些？
+            她记得，相恋多年的男友勾搭上了富家女，为了扫除她这个“障碍”，将她推下了悬崖。 好像，她才看清了他的真面目，都还没来得及恨他，就已经死了。
+            既然死了，怎么又会来了这里？
+            难道是——
+            当“穿越”二字在她的思维中划过，柳湘感觉自己像是被一道惊雷劈到了一样。
+            待记忆慢慢归位，又恢复了些许体力，她睁开眼睛。
+            入目看到的，是两个人，一男一女，都穿着大红色的古装，像是一对新婚的夫妻。 但那女人却衣衫不整，香肩裸露，莲藕般嫩白的手臂，如同藤蔓一样，缠绕在男人的脖颈上。
+            这两人一边笑着，一边看她，见她醒了，面上皆露出鄙夷之色。
+            柳湘也跟着笑了，那笑里，满是嘲讽。
+            呵，这便是她的新婚之夜。
+            呵，这便是她的夫君，司空紫阳。
+            当看到这一对男女的时候，那些涌入她脑海的记忆，让她明白了刚刚发生过什么事，也让她接受了自己已然穿越的事实。
+            然而穿越这件事，还是没有眼前这番景象带给她的冲击大。 洞房花烛夜，本该红烛照影，你侬我侬，但那新婚的夫君，竟然当着妻子的面，狎妓淫乱，逼她自尽。
+            渣男，全都是渣男！ 为这等渣男，柳湘着实觉的那女子死的太不值。 好在她自己并不是为了渣男而寻死的，如若不然，只怕她死了都要被自己气活。
+            既然她现在占了人家的身体，那就势必要让她活的痛快，不能这么窝囊。 不单单是为了那个死去的女子，也是为了她自己，前世没来得及讨要的，这辈子一并要回来。
+            柳湘迷迷糊糊醒来，发现自己侧躺在冷冰冰的地上。
+            头痛欲裂，浑身没有一点力气，更不能动弹分毫。
+            汩汩入耳的，是男人和女人的调笑声。 还有一幅惨烈的图景，在她的脑海里浮现。
+            红色，刺目的红色，喧闹的喜乐，丰神俊朗却又面露鄙夷的年轻男子。 还有一个媚眼如丝的女人，与那男人一边调笑，一边冷眼看着一袭红色的身影，轰然撞向坚硬的红木桌角。
+            霎时鲜血四溅，整个世界，沉寂了……
+            柳湘记得自己跌入了悬崖，为何醒来想到的，竟是这些？
+            她记得，相恋多年的男友勾搭上了富家女，为了扫除她这个“障碍”，将她推下了悬崖。 好像，她才看清了他的真面目，都还没来得及恨他，就已经死了。
+            既然死了，怎么又会来了这里？
+            难道是——
+            当“穿越”二字在她的思维中划过，柳湘感觉自己像是被一道惊雷劈到了一样。
+            待记忆慢慢归位，又恢复了些许体力，她睁开眼睛。
+            入目看到的，是两个人，一男一女，都穿着大红色的古装，像是一对新婚的夫妻。 但那女人却衣衫不整，香肩裸露，莲藕般嫩白的手臂，如同藤蔓一样，缠绕在男人的脖颈上。
+            这两人一边笑着，一边看她，见她醒了，面上皆露出鄙夷之色。
+            柳湘也跟着笑了，那笑里，满是嘲讽。
+            呵，这便是她的新婚之夜。
+            呵，这便是她的夫君，司空紫阳。
+            当看到这一对男女的时候，那些涌入她脑海的记忆，让她明白了刚刚发生过什么事，也让她接受了自己已然穿越的事实。
+            然而穿越这件事，还是没有眼前这番景象带给她的冲击大。 洞房花烛夜，本该红烛照影，你侬我侬，但那新婚的夫君，竟然当着妻子的面，狎妓淫乱，逼她自尽。
+            渣男，全都是渣男！ 为这等渣男，柳湘着实觉的那女子死的太不值。 好在她自己并不是为了渣男而寻死的，如若不然，只怕她死了都要被自己气活。
+            既然她现在占了人家的身体，那就势必要让她活的痛快，不能这么窝囊。 不单单是为了那个死去的女子，也是为了她自己，前世没来得及讨要的，这辈子一并要回来。
+            柳湘迷迷糊糊醒来，发现自己侧躺在冷冰冰的地上。
+            头痛欲裂，浑身没有一点力气，更不能动弹分毫。
+            汩汩入耳的，是男人和女人的调笑声。 还有一幅惨烈的图景，在她的脑海里浮现。
+            红色，刺目的红色，喧闹的喜乐，丰神俊朗却又面露鄙夷的年轻男子。 还有一个媚眼如丝的女人，与那男人一边调笑，一边冷眼看着一袭红色的身影，轰然撞向坚硬的红木桌角。
+            霎时鲜血四溅，整个世界，沉寂了……
+            柳湘记得自己跌入了悬崖，为何醒来想到的，竟是这些？
+            她记得，相恋多年的男友勾搭上了富家女，为了扫除她这个“障碍”，将她推下了悬崖。 好像，她才看清了他的真面目，都还没来得及恨他，就已经死了。
+            既然死了，怎么又会来了这里？
+            难道是——
+            当“穿越”二字在她的思维中划过，柳湘感觉自己像是被一道惊雷劈到了一样。
+            待记忆慢慢归位，又恢复了些许体力，她睁开眼睛。
+            入目看到的，是两个人，一男一女，都穿着大红色的古装，像是一对新婚的夫妻。 但那女人却衣衫不整，香肩裸露，莲藕般嫩白的手臂，如同藤蔓一样，缠绕在男人的脖颈上。
+            这两人一边笑着，一边看她，见她醒了，面上皆露出鄙夷之色。
+            柳湘也跟着笑了，那笑里，满是嘲讽。
+            呵，这便是她的新婚之夜。
+            呵，这便是她的夫君，司空紫阳。
+            当看到这一对男女的时候，那些涌入她脑海的记忆，让她明白了刚刚发生过什么事，也让她接受了自己已然穿越的事实。
+            然而穿越这件事，还是没有眼前这番景象带给她的冲击大。 洞房花烛夜，本该红烛照影，你侬我侬，但那新婚的夫君，竟然当着妻子的面，狎妓淫乱，逼她自尽。
+            渣男，全都是渣男！ 为这等渣男，柳湘着实觉的那女子死的太不值。 好在她自己并不是为了渣男而寻死的，如若不然，只怕她死了都要被自己气活。
+            既然她现在占了人家的身体，那就势必要让她活的痛快，不能这么窝囊。 不单单是为了那个死去的女子，也是为了她自己，前世没来得及讨要的，这辈子一并要回来。
+        </div>
+        <!-- 小说正文部分END -->
+        <!-- 打赏图片 BEGIN-->
+        <div class="sd-reward">
+            <span></span>
+        </div>
+        <!-- 打赏图片END -->
+        <!-- 打赏的用户 BEGIN -->
+        <div class="revote ">
+            <ul class="rewardUser fl">
+                <li class="fl user-icon1">
+                    <p>【小s】打赏了1000咚币</p>
+                </li>
+                <li class="fl user-icon2">
+                    <p>【小s】打赏了1000咚币</p>
+                </li>
+                <li class="fl user-icon1">
+                    <p >【小s】打赏了1000咚币</p>
+                </li>
+                <li class="fl user-icon1">
+                    <p>【小s】打赏了1000咚币</p>
+                </li>
+                <li class="fl user-icon2">
+                    <p>【小s】打赏了1000咚币</p>
+                </li>
+                <li class="fl user-icon1">
+                    <p >【小s】打赏了1000咚币</p>
+                </li><li class="fl user-icon1">
+                <p>【小s】打赏了1000咚币</p>
+            </li>
+                <li class="fl user-icon2">
+                    <p>【小s】打赏了1000咚币</p>
+                </li>
+                <li class="fl user-icon1">
+                    <p >【小s】打赏了1000咚币</p>
+                </li>
+                <li class="fl user-icon2 ">
+                    <p>【小s】打赏了1000咚币</p>
+                </li>
+            </ul>
+
+        </div>
+        <!-- 打赏的用户 END -->
+    </div>
+    <!-- 内容部分END -->
+
+    <!-- 中间内容部分 END -->
+    <!-- 章节切换 BEGIN-->
+    <p class="chapterTab oh">
+        <a href="javascript:;" class="fl prev-chapter">上一章</a>
+        <a href="javascript:;" class="fl book-menu">目录</a>
+        <a href="javascript:;"  class="fl next-chapter">下一章</a>
+    </p>
+</div>
+<p class="sd-back" id="j-top"><img src="__STATIC__/read/images/home_btn_top.png" title="返回顶部哟" /></p>
+<script src="js/sd-backTop.js" type="text/javascript" charset="utf-8"></script>
+<!-- 章节切换 END-->
+<script type="text/javascript" src="__STATIC__/read/js/roll/roll-menu.js" ></script>
+<!--收藏-->
+<script type="text/javascript" src="__STATIC__/read/js/roll/roll-collect.js" ></script>
+<script type="text/javascript" src="__STATIC__/read/js/roll/roll-scroll.js"></script>
+<!--设置栏-->
+<script type="text/javascript" src="__STATIC__/read/js/roll/roll-set.js"></script>
+<script type="text/javascript" src="__STATIC__/read/js/roll/roll-setWrap.js"></script>
+<script src="__STATIC__/read/js/roll/chinese.js" type="text/javascript" charset="utf-8"></script>
+
+<!--保存-->
+<script type="text/javascript" src="__STATIC__/read/js/roll/roll-save.js"></script>
+
+
+<!--取消-->
+<script type="text/javascript" src="__STATIC__/read/js/roll/roll-cancel.js"></script>
+<script type="text/javascript" src="__STATIC__/read/js/roll/roll-close.js"></script>
+
+<!--显示打赏信息-->
+<script src="__STATIC__/read/js/roll/roll-show.js" type="text/javascript" charset="utf-8"></script>
+
+<!--章节切换-->
+<script src="__STATIC__/read/js/roll/chpater-change.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

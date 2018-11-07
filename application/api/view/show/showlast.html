@@ -1,0 +1,9 @@
+
+{volist name="chapter" id="vo" offset="21" length="$count-21"}
+<li class="fl oh"><a href="javascript:;" class="fl">{$vo.title}</a>
+    {if condition="$vo.the_price neq 0"}
+    <span class="vip fl">vip</span>
+    {/if}
+</li>
+{/volist}
+<!--<p class="show-all" id="show-all"><a href="javascript:show();" style="color: red;">+显示全部章节</a></p>-->

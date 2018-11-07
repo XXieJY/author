@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html xmlns=http://www.w3.org/1999/xhtml xmlns:bd=http://www.baidu.com/2010/xbdml>
+<head>
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+    <meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1">
+    <title>{:config('queue.WebName')}-泛次元小说互动阅读平台</title>
+    <meta name="keywords" content="腐女，神触，同文，宅圈">
+    <meta name="description" content="{:config('queue.WebName')}-为用户打造各种腐女，神触，同文，宅圈等小说的互动阅读平台">
+    <link rel="shortcut icon" href="__STATIC__/images/Favicon.ico" type="image/x-icon" />
+    <!--样式重置-->
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/rest.css" />
+    <!--头部样式-->
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/header.css"  />
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/header-small.css"  media="screen and (max-width: 1400px)"/>
+    <!--中间部分样式-->
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/container.css" />
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/container-small.css"  media="screen and (max-width: 1400px)"/>
+    <!--底部样式-->
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/footer.css" />
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/footer-small.css" media="screen and (max-width: 1400px)" />
+    <!--轮播图样式-->
+    <link rel="stylesheet" href="__STATIC__/css/slider.css" />
+    <link rel="stylesheet" href="__STATIC__/css/slider-small.css" media="screen and (max-width: 1400px)" />
+    <!--引入jquery-->
+    <script src="https://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- 360收录 -->
+    <!-- <script>
+        (function(){
+        var src = (document.location.protocol == "http:") ? "http://js.passport.qihuc
+     .com/11.0.1.js?d7af82f5d5a7d431d4b53f4d0069f989":"https://jspassport.ssl.qhimg.com/11.0.1.js?d7af82f5d5a7d431d4b53f4d0069f989";
+        document.write('<script src="' + src + '" id="sozz"><\/script>');
+        })();
+    </script>   -->
+</head>
+<body>
+<!--头部 begin-->
+<!--导航栏 begin-->
+{include file="public/top"}
+<!--banner END-->
+<!--container BEGIN-->
+<div class="container oh">
+    <!--左侧栏目 -->
+    <div class="sd-left-wrap fl">
+        <div class="oh">
+            <!--slider BEGIN-->
+            <div class="slider fl " id="slider">
+                <ul class="items" id="slider-items">
+
+                    {volist name="slide" id="vo"}
+                    <li class="fl">
+                        <a href="{:url('Bookinfo/index',['bookid'=>$vo.book_id])}">
+                            <img src="/Upload/Book/lun/{$vo.upload_img}">
+                            <p>
+                                <span>运营标题运营标题运营标1212题运营标题运营标题运营标题运营标题运营标题运营标题</span>
+                            </p>
+                        </a>
+                    </li>
+                   {/volist}
+
+                </ul>
+            </div>
+            <!--slider END-->
+            <!--深夜神触 BEGIN-->
+            <div class="sd-feel fr">
+                <div class="sd-title">
+                    <i class="fl"></i>
+                    <b class="fl">深夜神触</b>
+                    <span class="fl">宅男最懂</span>
+                    <a class="re-fresh fr" id="J_trade">
+                        <span class="fl">换一批</span>
+                        <i ></i>
+                    </a>
+                </div>
+                <div id="j_bookWrap" class="book-wrap col-wrap">
+                    <div class="sd-list active ">
+                        <ul class="book-list oh fl ">
+                            {volist name="godTouch" id="vo" offset="0" length="3"}
+                            <li class="fl">
+                                <a href="{:url('Bookinfo/index',['bookid'=>$vo.book_id])}">
+                                    <img src="/Upload/Book/zhong/{$vo.upload_img}"  alt=""  width="80px"/>
+                                    <p class="book-title">{$vo.book_name}</p>
+                                    <span class="book-price">{$vo.level|level}</span>
+                                </a>
+                            </li>
+                            {/volist}
+
+                            <li class="fl book-item">
+                                <a href="{:url('Bookinfo/index',['bookid'=>$godTouch[3]['book_id']])}">
+                                    <img src="/Upload/Book/zhong/{$godTouch[3]['upload_img']}"  alt=""  width="80px"/>
+                                    <p class="book-title">{$godTouch[3]['book_name']}</p>
+                                    <span class="book-price">{$godTouch[3]['level']|level}</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="sd-list ">
+                        <ul class="book-list oh fl">
+                            {volist name="godTouch" id="vo" offset="4" length="3"}
+                            <li class="fl">
+                                <a href="{:url('Bookinfo/index',['bookid'=>$vo.book_id])}">
+                                    <img src="/Upload/Book/zhong/{$vo.upload_img}"  alt=""  width="80"/>
+                                    <p class="book-title">{$vo.book_name}</p>
+                                    <span class="book-price">{$vo.level|level}</span>
+                                </a>
+                            </li>
+                            {/volist}
+
+                            <li class="fl book-item">
+                                <a href="{:url('Bookinfo/index',['bookid'=>$godTouch[7]['book_id']])}">
+                                    <img src="/Upload/Book/zhong/{$godTouch[7]['upload_img']}"  alt=""  width="80"/>
+                                    <p class="book-title">{$godTouch[7]['book_name']}</p>
+                                    <span class="book-price">{$godTouch[7]['level']|level}</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="sd-list">
+                        <ul class="book-list oh fl">
+
+                            {volist name="godTouch" id="vo" offset="8" length="3"}
+                            <li class="fl">
+                                <a href="{:url('Bookinfo/index',['bookid'=>$vo.book_id])}">
+                                    <img src="/Upload/Book/zhong/{$vo.upload_img}"  alt=""  width="80px"/>
+                                    <p class="book-title">{$vo.book_name}</p>
+                                    <span class="book-price">{$vo.level|level}</span>
+                                </a>
+                            </li>
+                            {/volist}
+                            <li class="fl book-item">
+                                <a href="{:url('Bookinfo/index',['bookid'=>$godTouch[11]['book_id']])}">
+                                    <img src="/Upload/Book/zhong/{$godTouch[11]['upload_img']}"  alt=""  width="80"/>
+                                    <p class="book-title">{$godTouch[11]['book_name']}</p>
+                                    <span class="book-price">{$godTouch[11]['level']|level}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--深夜神触 END-->
+        </div>
+        <!--推荐部分 BEGIN-->
+        <div class="sd-hot">
+            <!--推荐头部BEGIN-->
+            <div class="hot-info oh">
+                <p class="fl">
+                    <i class="fl recommend"></i>
+                    <span class="sd-hot-title fl">主编强推</span>
+                    <span class="sd-hot-intr fl">200位宅文大神鼎力打造泛次元世界</span>
+                </p>
+                <a href="" class="fr sd-more">
+                    <span class="fl more">更多</span>
+                    <span class="fl">&gt;</span>
+                </a>
+            </div>
+            <!--推荐头部END-->
+            <!--书籍列表-->
+            <ul class=" sd-book-list ">
+                {volist name="push" id="vo"}
+                <a href="{:url('Bookinfo/index',['bookid'=>$vo.book_id])}">
+                    <li class="fl ">
+                        <div class="book-cover">
+                            <img src="/Upload/Book/zhong/{$vo.upload_img}" alt="{$vo.book_name}">
+                            <!--书籍遮罩BEGIN-->
+                            <div class="book-cover-mask">
+                                <!--作品信息BEGIN-->
+                                <div class="sd-works">
+                                    <p class="book-works">
+                                        <i></i>
+                                        <span class="sd-author-name">{$vo.author_name}</span>
+                                    </p>
+                                    <p class="book-intr" style="overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 5;">
+                                        {$vo.book_brief}
+                                    </p>
+                                    <span>{$vo.level|level}</span>
+                                </div>
+                                <!--作品信息END-->
+                            </div>
+                            <!--书籍遮罩END-->
+                        </div>
+                        <p class="book-title">{$vo.book_name}</p>
+                        <p class="oh sd-book-info">
+                            <span class="book-price fl">{$vo.words|num}</span>
+                            <span class="fl sd-bor"></span>
+                            <span class="book-sort fl"> {$vo.book_type}</span>
+                        </p>
+                    </li>
+                </a>
+                {/volist}
+
+            </ul>
+        </div>
+        <!--推荐部分 END-->
+        <!--banner轮播部分-->
+        <div class="sd-wrap" id="sd-wrap">
+            <ul class="sd-slider" id="sd-slider">
+                <li>
+                    <a href="javascript:;">
+                        <img src="__STATIC__/images/slider-top-01.png"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <img src="__STATIC__/images/slider-top-01.png"/>
+                    </a>
+                </li>
+            </ul>
+            <!--<ol>
+                    <li class="fl"></li>
+                    <li class="fl"></li>
+                </ol>-->
+        </div>
+        <!--END-->
+        <div class="sd-hot">
+            <!--推荐头部BEGIN-->
+            <div class="hot-info oh">
+                <p class="fl">
+                    <i class="fl  fiery "></i>
+                    <span class="sd-hot-title fl">火热连载</span>
+                    <span class="sd-hot-intr fl">200位宅文大神鼎力打造泛次元世界</span>
+                </p>
+                <a href="" class="fr sd-more">
+                    <span class="fl more">更多</span>
+                    <span class="fl ">&gt;</span>
+                </a>
+            </div>
+            <!--推荐头部END-->
+            <!--书籍列表-->
+            <ul class=" sd-book-list ">
+                {volist name="hot" id="vo"}
+                <a href="{:url('Bookinfo/index',['bookid'=>$vo.book_id])}">
+                    <li class="fl ">
+                        <div class="book-cover">
+                            <img src="/Upload/Book/zhong/{$vo.upload_img}" alt="{$vo.book_name}">
+                            <!--书籍遮罩BEGIN-->
+                            <div class="book-cover-mask">
+                                <!--作品信息BEGIN-->
+                                <div class="sd-works">
+                                    <p class="book-works">
+                                        <i></i>
+                                        <span class="sd-author-name">{$vo.author_name}</span>
+                                    </p>
+                                    <p class="book-intr" style="overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 5;">
+                                        {$vo.book_brief}
+                                    </p>
+                                    <span>{$vo.level|level}</span>
+                                </div>
+                                <!--作品信息END-->
+                            </div>
+                            <!--书籍遮罩END-->
+                        </div>
+                        <p class="book-title">{$vo.book_name}</p>
+                        <p class="oh sd-book-info">
+                            <span class="book-price fl">{$vo.words|num}</span>
+                            <span class="fl sd-bor"></span>
+                            <span class="book-sort fl"> {$vo.book_type}</span>
+                        </p>
+                    </li>
+                </a>
+                {/volist}
+
+            </ul>
+
+        </div>
+        <!--推荐部分 END-->
+        <!--banner轮播部分-->
+        <!--banner轮播部分-->
+        <div class="sd-wrap" id="col-wrap">
+            <ul class="sd-slider" id="col-slider">
+                <li>
+                    <a href="javascript:;">
+                        <img src="__STATIC__/images/slider-top-01.png"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <img src="__STATIC__/images/slider-top-01.png"/>
+                    </a>
+                </li>
+            </ul>
+            <!--<ol>
+                    <li class="fl"></li>
+                    <li class="fl"></li>
+                </ol>-->
+        </div>
+        <div class="sd-hot">
+            <!--推荐头部BEGIN-->
+            <div class="hot-info oh">
+                <p class="fl">
+                    <i class="fl large"></i>
+                    <span class="sd-hot-title fl">大触神作</span>
+                    <span class="sd-hot-intr fl">200位宅文大神鼎力打造泛次元世界</span>
+                </p>
+                <a href="" class="fr sd-more">
+                    <span class="fl more">更多</span>
+                    <span class="fl">&gt;</span>
+                </a>
+            </div>
+            <!--推荐头部END-->
+            <!--书籍列表-->
+            <ul class=" sd-book-list ">
+                {volist name="dachu" id="vo"}
+                <a href="{:url('Bookinfo/index',['bookid'=>$vo.book_id])}">
+                    <li class="fl ">
+                        <div class="book-cover">
+                            <img src="/Upload/Book/zhong/{$vo.upload_img}" alt="{$vo.book_name}">
+                            <!--书籍遮罩BEGIN-->
+                            <div class="book-cover-mask">
+                                <!--作品信息BEGIN-->
+                                <div class="sd-works">
+                                    <p class="book-works">
+                                        <i></i>
+                                        <span class="sd-author-name">{$vo.author_name}</span>
+                                    </p>
+                                    <p class="book-intr" style="overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 5;">
+                                        {$vo.book_brief}
+                                    </p>
+                                    <span>{$vo.level|level}</span>
+                                </div>
+                                <!--作品信息END-->
+                            </div>
+                            <!--书籍遮罩END-->
+                        </div>
+                        <p class="book-title">{$vo.book_name}</p>
+                        <p class="oh sd-book-info">
+                            <span class="book-price fl">{$vo.words|num}</span>
+                            <span class="fl sd-bor"></span>
+                            <span class="book-sort fl"> {$vo.book_type}</span>
+                        </p>
+                    </li>
+                </a>
+                {/volist}
+
+            </ul>
+
+        </div>
+        <!--推荐部分 END-->
+        <!--banner轮播部分-->
+        <!--banner轮播部分-->
+        <div class="sd-wrap" id="cols-wrap">
+            <ul class="sd-slider" id="cols-slider">
+                <li>
+                    <a href="javascript:;">
+                        <img src="__STATIC__/images/slider-top-01.png"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <img src="__STATIC__/images/slider-top-01.png"/>
+                    </a>
+                </li>
+            </ul>
+            <!--<ol>
+                    <li class="fl"></li>
+                    <li class="fl"></li>
+                </ol>-->
+        </div>
+        <!--潜力新作-->
+        <div class="sd-hot">
+            <div class="hot-info oh">
+                <p class="fl">
+                    <i class="fl potentia"></i>
+                    <span class="sd-hot-title fl">潜力新作</span>
+                    <span class="sd-hot-intr fl">200位宅文大神鼎力打造泛次元世界</span>
+                </p>
+                <a href="" class="fr sd-more">
+                    <span class="fl more">更多</span>
+                    <span class="fl">&gt;</span>
+                </a>
+            </div>
+            <ul class=" sd-book-list ">
+                {volist name="xinzuo" id="vo"}
+                <a href="{:url('Bookinfo/index',['bookid'=>$vo.book_id])}">
+                    <li class="fl ">
+                        <div class="book-cover">
+                            <img src="/Upload/Book/zhong/{$vo.upload_img}" alt="{$vo.book_name}">
+                            <!--书籍遮罩BEGIN-->
+                            <div class="book-cover-mask">
+                                <!--作品信息BEGIN-->
+                                <div class="sd-works">
+                                    <p class="book-works">
+                                        <i></i>
+                                        <span class="sd-author-name">{$vo.author_name}</span>
+                                    </p>
+                                    <p class="book-intr" style="overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 5;">
+                                        {$vo.book_brief}
+                                    </p>
+                                    <span>{$vo.level|level}</span>
+                                </div>
+                                <!--作品信息END-->
+                            </div>
+                            <!--书籍遮罩END-->
+                        </div>
+                        <p class="book-title">{$vo.book_name}</p>
+                        <p class="oh sd-book-info">
+                            <span class="book-price fl">{$vo.words|num}</span>
+                            <span class="fl sd-bor"></span>
+                            <span class="book-sort fl"> {$vo.book_type}</span>
+                        </p>
+                    </li>
+                </a>
+                {/volist}
+
+            </ul>
+        </div>
+        <div class="sd-hot">
+            <!--新书预热-->
+            <div class="hot-info oh">
+                <p class="fl">
+                    <i class="fl new_book"></i>
+                    <span class="sd-hot-title fl">新书预热</span>
+                    <span class="sd-hot-intr fl">200位宅文大神鼎力打造泛次元世界</span>
+                </p>
+                <a href="" class="fr sd-more">
+                    <span class="fl more">更多</span>
+                    <span class="fl">&gt;</span>
+                </a>
+            </div>
+            <ul class=" sd-book-list ">
+                {volist name="newBook" id="vo"}
+                <a href="{:url('Bookinfo/index',['bookid'=>$vo.book_id])}">
+                    <li class="fl ">
+                        <div class="book-cover">
+                            <img src="/Upload/Book/zhong/{$vo.upload_img}" alt="{$vo.book_name}">
+                            <!--书籍遮罩BEGIN-->
+                            <div class="book-cover-mask">
+                                <!--作品信息BEGIN-->
+                                <div class="sd-works">
+                                    <p class="book-works">
+                                        <i></i>
+                                        <span class="sd-author-name">{$vo.author_name}</span>
+                                    </p>
+                                    <p class="book-intr" style="overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 5;">
+                                        {$vo.book_brief}
+                                    </p>
+                                    <span>{$vo.level|level}</span>
+                                </div>
+                                <!--作品信息END-->
+                            </div>
+                            <!--书籍遮罩END-->
+                        </div>
+                        <p class="book-title">{$vo.book_name}</p>
+                        <p class="oh sd-book-info">
+                            <span class="book-price fl">{$vo.words|num}</span>
+                            <span class="fl sd-bor"></span>
+                            <span class="book-sort fl"> {$vo.book_type}</span>
+                        </p>
+                    </li>
+                </a>
+                {/volist}
+
+            </ul>
+        </div>
+        <!--最新章节BEGIN-->
+        <div class="hot-info oh sd-chapter-new">
+            <p class="fl">
+                <i class="fl"></i>
+                <span class="sd-hot-title fl sd-chapter-title">最新章节 </span>
+            </p>
+            <a href="" class="fr sd-more sd-chapter-more">
+                <span class="fl more">更多</span>
+                <span class="fl">&gt;</span>
+            </a>
+        </div>
+        <!--章节信息BEGIN-->
+        <div class="chaper">
+            <ul class="chaper-info fw oh chapter-center">
+                <li class="fl chaper-info-li1 sd-border">序号</li>
+                <li class="fl chaper-info-li2 sd-border">小说类别</li>
+                <li class="fl chaper-info-li3 sd-border">小说书名/小说章节</li>
+                <li class="fl chaper-info-li4 sd-border">字数</li>
+                <li class="fl chaper-info-li5 sd-border">小说作者</li>
+                <li class="fl chaper-info-li6 bn">更新时间</li>
+            </ul>
+            <!--章节信息END-->
+             {volist name="chapter" id="vo"}
+            <ul class="chaper-info  oh sd-fz14 sd-chapter-border bd">
+                <li class="fl chaper-li1">{$a++}</li>
+                <li class="fl chaper-li2">[{$vo.book_type}]</li>
+                <li class="fl chaper-li3">
+                    <a href="{:url('Bookinfo/index',['bookid'=>$vo.book_id])}">
+                        <span class="book-chaper">{$vo.book_name}</span>
+                        <span class="chaper-title">{$vo.title}</span>
+                        {if condition="$vo.the_price eq 0"}
+                        <span class="sd-vip">[免费]</span>
+                        {else /}
+                        <span class="sd-vip">[VIP]</span>
+                        {/if}
+                    </a>
+                </li>
+                <li class="fl chaper-li4">{$vo.words}</li>
+                <li class="fl chaper-li5"><a href="">{$vo.author_name}</a></li>
+                <li class="fl chaper-info-li6 bn"><?php echo date('Y-m-d H:i',strtotime($vo['time']));?></li>
+            </ul>
+            {/volist}
+            <!--章节更新BEGIN-->
+        </div>
+        <!--最新章节END-->
+    </div>
+    <!--左侧栏目 END-->
+    <!--右侧栏目 BEGIN-->
+    <div class="sd-right fr">
+        <div class="sd-right-glogo"></div>
+        <div class="sd-banner-img">
+            <a href="javascript:;" class=""><img src="__STATIC__/images/home_img_authorwelfare.png" alt="" /></a>
+            <a href="" class="banner02"><img src="__STATIC__/images/home_img_manuscripts.png" alt="" /></a>
+        </div>
+        <!--神触大作排行榜 BEGIN-->
+        <div class="rank oh">
+            <i class="fl ranking_1"></i>
+            <p class="fl">
+                <b class="db">点击榜</b>
+                <span class="sd-rank">鼎力打造</span>
+            </p>
+            <a href="" class="fr sd-more sd-mat0">
+                <span class="fl more">更多</span>
+                <span class="fl">&gt;</span>
+            </a>
+        </div>
+        <div class="rank-list">
+            <div class="rank-book oh">
+                <div class="left-book-info fl oh">
+                    <span class="book-num num-icon">NO.1</span>
+                    <p class="book-title"> <a href="{:url('Bookinfo/index',['bookid'=>$click[0]['book_id']])}" title="{$click[0]['book_name']}"> {$click[0]['book_name']|title}</a></p>
+                    <p class="sd-author">{$click[0]['author_name']}</p>
+                    <p class="sd-vip hr">
+                        {$click[0]['click_weeks']|num}
+                        <span class="sd-fz12">点击</span>
+                    </p>
+                </div>
+                <div class="right-img-cover fr">
+                    <a href="{:url('Bookinfo/index',['bookid'=>$click[0]['book_id']])}" title="{$click[0]['book_name']}">
+                    <img src="/Upload/Book/zhong/{$click[0]['upload_img']}" width="80px;"/>
+                    </a>
+                </div>
+            </div>
+            <a href="{:url('Bookinfo/index',['bookid'=>$click[1]['book_id']])}" class="col-space" title="{$click[1]['book_name']}">
+                <div class="rank-book-item oh">
+                    <span class="book-num fl fz12 col-primary  col-red">2</span>
+                    <p class="book-item-list fl fz14">[{$click[1]['book_type']}] <span class="col-black">{$click[1]['book_name']|title}</span> </p>
+                    <p class=" fz14 col-click fr">{$click[1]['click_weeks']|num}</p>
+                </div>
+            </a>
+            <a href="{:url('Bookinfo/index',['bookid'=>$click[2]['book_id']])}" class="col-space" title="{$click[2]['book_name']}">
+                <div class="rank-book-item oh">
+                    <span class="book-num fl fz12 col-primary col-light-red">3</span>
+                    <p class="book-item-list fl fz14">[{$click[2]['book_type']}] <span class="col-black">{$click[2]['book_name']|title}</span> </p>
+                    <p class=" fz14 col-click fr">{$click[2]['click_weeks']|num}</p>
+                </div>
+            </a>
+            {volist name="click" id="vo" offset="3" length="7"}
+            <a href="{:url('Bookinfo/index',['bookid'=>$vo.book_id])}" class="col-space" title="{$vo.book_name}">
+                <div class="rank-book-item oh">
+                    <span class="book-num fl fz12 col-primary">{$b++}</span>
+                    <p class="book-item-list fl fz14">[{$vo.book_type}] <span class="col-black">{$vo.book_name|title}</span> </p>
+                    <p class=" fz14 col-click fr">{$vo.click_weeks|num}</p>
+                </div>
+            </a>
+            {/volist}
+        </div>
+        <!--神触大作排行榜 END-->
+        <!--神触大作排行榜 BEGIN-->
+        <div class="rank oh">
+            <i class="fl ranking_2"></i>
+            <p class="fl">
+                <b class="db">收藏榜</b>
+                <span class="sd-rank">鼎力打造</span>
+            </p>
+            <a href="" class="fr sd-more sd-mat0">
+                <span class="fl more">更多</span>
+                <span class="fl">&gt;</span>
+            </a>
+        </div>
+        <div class="rank-list">
+            <div class="rank-book oh">
+                <div class="left-book-info fl">
+                    <span class="book-num num-icon">NO.1</span>
+                    <a href="{:url('Bookinfo/index',['bookid'=>$collection[0]['book_id']])}" title="{$collection[0]['book_name']}">
+                    <p class="book-title"> {$collection[0]['book_name']|title}</p>
+                    </a>
+                    <p class="sd-author">{$collection[0]['author_name']}</p>
+                    <p class="sd-vip">
+                        {$collection[0]['click_weeks']|num}
+                        <span class="sd-fz12">点击</span>
+                    </p>
+                </div>
+                <div class="right-img-cover fr">
+                    <a href="{:url('Bookinfo/index',['bookid'=>$collection[0]['book_id']])}" title="{$collection[0]['book_name']}">
+                    <img src="/Upload/Book/zhong/{$collection[0]['upload_img']}" width="80px;"/>
+                    </a>
+                </div>
+            </div>
+            <a href="{:url('Bookinfo/index',['bookid'=>$collection[1]['book_id']])}" class="col-space" title="{$collection[1]['book_name']}">
+                <div class="rank-book-item oh">
+                    <span class="book-num fl fz12 col-primary  col-red">2</span>
+                    <p class="book-item-list fl fz14">[{$collection[1]['book_type']}] <span class="col-black">{$collection[1]['book_name']|title}</span> </p>
+                    <p class=" fz14 col-click fr">{$collection[1]['click_weeks']|num}</p>
+                </div>
+            </a>
+            <a href="{:url('Bookinfo/index',['bookid'=>$collection[2]['book_id']])}" class="col-space" title="{$collection[2]['book_name']}">
+                <div class="rank-book-item oh">
+                    <span class="book-num fl fz12 col-primary col-light-red">3</span>
+                    <p class="book-item-list fl fz14">[{$collection[2]['book_type']}] <span class="col-black">{$collection[2]['book_name']|title}</span> </p>
+                    <p class=" fz14 col-click fr">{$collection[2]['click_weeks']|num}</p>
+                </div>
+            </a>
+            {volist name="collection" id="vo" offset="3" length="7"}
+            <a href="{:url('Bookinfo/index',['bookid'=>$vo.book_id])}" class="col-space" title="{$vo.book_name}">
+                <div class="rank-book-item oh">
+                    <span class="book-num fl fz12 col-primary">{$c++}</span>
+                    <p class="book-item-list fl fz14">[{$vo.book_type}] <span class="col-black">{$vo.book_name|title}</span> </p>
+                    <p class=" fz14 col-click fr">{$vo.click_weeks|num}</p>
+                </div>
+            </a>
+          {/volist}
+        </div>
+
+        <!--神触大作排行榜 END-->
+        <!--神触大作排行榜 BEGIN-->
+        <div class="rank oh">
+            <i class="fl ranking_3"></i>
+            <p class="fl">
+                <b class="db">推荐榜</b>
+                <span class="sd-rank">鼎力打造</span>
+            </p>
+            <a href="" class="fr sd-more sd-mat0">
+                <span class="fl more">更多</span>
+                <span class="fl">&gt;</span>
+            </a>
+        </div>
+        <div class="rank-list">
+            <div class="rank-book oh">
+                <div class="left-book-info fl">
+                    <span class="book-num num-icon">NO.1</span>
+                    <a href="{:url('Bookinfo/index',['bookid'=>$vote[0]['book_id']])}" title="{$vote[0]['book_name']}">
+                    <p class="book-title"> {$vote[0]['book_name']|title}</p>
+                    </a>
+                    <p class="sd-author">{$vote[0]['author_name']}</p>
+                    <p class="sd-vip">
+                        {$vote[0]['click_weeks']|num}
+                        <span class="sd-fz12">点击</span>
+                    </p>
+                </div>
+                <div class="right-img-cover fr">
+                    <a href="{:url('Bookinfo/index',['bookid'=>$vote[0]['book_id']])}" title="{$vote[0]['book_name']}">
+                    <img src="/Upload/Book/zhong/{$vote[0]['upload_img']}" width="80px;"/>
+                    </a>
+                </div>
+            </div>
+            <a href="{:url('Bookinfo/index',['bookid'=>$vote[1]['book_id']])}" class="col-space" title="{$vote[1]['book_name']}">
+                <div class="rank-book-item oh">
+                    <span class="book-num fl fz12 col-primary  col-red">2</span>
+                    <p class="book-item-list fl fz14">[{$vote[1]['book_type']}] <span class="col-black">{$vote[1]['book_name']|title}</span> </p>
+                    <p class=" fz14 col-click fr">{$vote[1]['click_weeks']|num}</p>
+                </div>
+            </a>
+            <a href="{:url('Bookinfo/index',['bookid'=>$vote[2]['book_id']])}" class="col-space" title="{$vote[2]['book_name']}">
+                <div class="rank-book-item oh">
+                    <span class="book-num fl fz12 col-primary col-light-red">3</span>
+                    <p class="book-item-list fl fz14">[{$vote[2]['book_type']}] <span class="col-black">{$vote[2]['book_name']|title}</span> </p>
+                    <p class=" fz14 col-click fr">{$vote[2]['click_weeks']|num}</p>
+                </div>
+            </a>
+
+            {volist name="vote" id="vo" offset="3" length="7"}
+            <a href="{:url('Bookinfo/index',['bookid'=>$vo.book_id])}" class="col-space" title="{$vo.book_name}">
+                <div class="rank-book-item oh">
+                    <span class="book-num fl fz12 col-primary">{$d++}</span>
+                    <p class="book-item-list fl fz14">[{$vo.book_type}] <span class="col-black">{$vo.book_name|title}</span> </p>
+                    <p class=" fz14 col-click fr">{$vo.click_weeks|num}</p>
+                </div>
+            </a>
+           {/volist}
+        </div>
+        <!--神触大作排行榜 END-->
+        <!--排行4排行榜 BEGIN-->
+        <div class="rank oh">
+            <i class="fl ranking_4"></i>
+            <p class="fl">
+                <b class="db">同人榜</b>
+                <span class="sd-rank">鼎力打造</span>
+            </p>
+            <a href="" class="fr sd-more sd-mat0">
+                <span class="fl more">更多</span>
+                <span class="fl">&gt;</span>
+            </a>
+        </div>
+        <div class="rank-list">
+            <div class="rank-book oh">
+                <div class="left-book-info fl">
+                    <span class="book-num num-icon">NO.1</span>
+                    <a href="{:url('Bookinfo/index',['bookid'=>$tongren[0]['book_id']])}" class="col-space" title="{$tongren[0]['book_name']}">
+                    <p class="book-title"> {$tongren[0]['book_name']|title}</p>
+                    </a>
+                    <p class="sd-author">{$tongren[0]['author_name']}</p>
+                    <p class="sd-vip">
+                        {$tongren[0]['click_weeks']|num}
+                        <span class="sd-fz12">点击</span>
+                    </p>
+                </div>
+                <div class="right-img-cover fr">
+                    <a href="{:url('Bookinfo/index',['bookid'=>$tongren[0]['book_id']])}" class="col-space" title="{$tongren[0]['book_name']}">
+                    <img src="/Upload/Book/zhong/{$tongren[0]['upload_img']}" width="80px" alt="{$tongren[0]['book_name']}"/>
+                    </a>
+                </div>
+            </div>
+            <a href="{:url('Bookinfo/index',['bookid'=>$tongren[1]['book_id']])}" class="col-space" title="{$tongren[1]['book_name']}">
+                <div class="rank-book-item oh">
+                    <span class="book-num fl fz12 col-primary  col-red">2</span>
+                    <p class="book-item-list fl fz14">[{$tongren[1]['book_type']}] <span class="col-black">{$tongren[1]['book_name']|title}</span> </p>
+                    <p class=" fz14 col-click fr">{$tongren[1]['click_weeks']|num}</p>
+                </div>
+            </a>
+            <a href="{:url('Bookinfo/index',['bookid'=>$tongren[2]['book_id']])}" class="col-space" title="{$tongren[2]['book_name']}">
+                <div class="rank-book-item oh">
+                    <span class="book-num fl fz12 col-primary col-light-red">3</span>
+                    <p class="book-item-list fl fz14">[{$tongren[2]['book_type']}] <span class="col-black">{$tongren[2]['book_name']|title}</span> </p>
+                    <p class=" fz14 col-click fr">{$tongren[2]['click_weeks']|num}</p>
+                </div>
+            </a>
+
+            {volist name="tongren" id="vo" offset="3" length="7"}
+            <a href="{:url('Bookinfo/index',['bookid'=>$vo.book_id])}" class="col-space" title="{$vo.book_name}">
+                <div class="rank-book-item oh">
+                    <span class="book-num fl fz12 col-primary">{$e++}</span>
+                    <p class="book-item-list fl fz14">[{$vo.book_type}] <span class="col-black">{$vo.book_name|title}</span> </p>
+                    <p class=" fz14 col-click fr">{$vo.click_weeks|num}</p>
+                </div>
+            </a>
+            {/volist}
+
+        </div>
+
+    </div>
+    <!--右侧栏目 END-->
+    <!--右侧栏目 END-->
+</div>
+<!--</div>-->
+<!--container END-->
+<!--底部BEGIN-->
+{include file="public/bot"}
+<!--底部END-->
+<!--书咚APP下载模块BEGIN-->
+<div class="app" id="js-app">
+
+    <img src="__STATIC__/images/app-log_03.png" alt="" />
+    <p class="app-code"><img src="__STATIC__/images/app.png" /></p>
+    <button class="app-btn">下载客户端</button>
+</div>
+<script type="text/javascript" src="__STATIC__/js/clamp.js"></script>
+
+
+<script src="__STATIC__/js/sd-scroll.js" type="text/javascript" charset="utf-8"></script>
+<!--APP下载模块END-->
+<!--返回顶部BEGIN-->
+<p class="sd-back" id="j-top"><img src="__STATIC__/images/home_btn_top.png" title="返回顶部哟" /></p>
+<script src="__STATIC__/js/sd-backTop.js" type="text/javascript" charset="utf-8"></script>
+<!--返回顶部END-->
+<script src="__STATIC__/js/scorll.js" type="text/javascript" charset="utf-8"></script>
+<!--轮播图js-->
+
+<script src="__STATIC__/js/slider.js" type="text/javascript" charset="utf-8"></script>
+<script src="__STATIC__/js/sd-sliderUp.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="__STATIC__/js/sd-search.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="__STATIC__/js/sd.js" type="text/javascript" charset="utf-8"></script>
+<script src="__STATIC__/js/change.js" type="text/javascript" charset="utf-8"></script>
+<script src="__STATIC__/js/sd-selectcolor.js"></script>
+</body>
+</html>

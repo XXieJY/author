@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>登录-{:config('queue.A_Name')}</title>
+    <meta name = "format-detection" content="telephone = no" />
+    <link rel="shortcut icon" href="__STATIC__/images/Favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="__STATIC__/author/css/rest.css" />
+    <link rel="stylesheet" href="__STATIC__/author/css/header.css" />
+    <link rel="stylesheet" href="__STATIC__/author/css/del.css" />
+    <link rel="stylesheet" type="text/css" href="__STATIC__/author/css/loginWrap.css"/>
+    <link rel="stylesheet" href="__STATIC__/author/css/footer.css" />
+    <script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+</head>
+<body>
+<!--头部 begin-->
+{include file="public/login"}
+<!--头部 end-->
+<!--登录框  begin-->
+<div class="loginWrap">
+    <div class="loginBox">
+        <form action="{:url('Login/login')}" method="post">
+            <img class="loginIcon db"  src="__STATIC__/author/images/authors_login_icon_uers.png"/>
+            <input type="text" name="email" placeholder="请输入您注册的邮箱" id="email" class="email db"/>
+            <p class="warn emailWarn dn"><i class="fl"></i><span class="fl">邮箱格式不对</span></p>
+            <div class="pwd">
+                <input type="password" name="password"  placeholder="请输入密码" value="" class="fl" id="pwd" maxlength="16" />
+                <!--<img class="fl show" id="J_showHide" src="__STATIC__/author/images/authors_login_btn_hide.png"/>-->
+                <span class="fr " id="J_showHide"></span>
+            </div>
+
+            <p class="warn pwdWarn dn"><i class="fl"></i><span class="fl">密码格式不对</span></p>
+            <p class="forgetPwd oh"><a href="{:url('Login/forget')}" class="fr">忘记密码？</a></p>
+            <button class="db signIn" >登录</button>
+            <a class="db authorEnter" href="{:url('Register/index')}" style="width: ">注册作者</a>
+        </form>
+
+    </div>
+</div>
+<!--登录框  end-->
+<!--底部 BEGIN-->
+{include file="public/bot"}
+
+<!--底部 END-->
+<script src="__STATIC__/author/js/login.js" type="text/javascript" charset="utf-8"></script>
+<script src="__STATIC__/author/js/jq-select.js" type="text/javascript" charset="utf-8"></script>
+
+</body>
+</html>
+<script>
+    $("#email").hover(function () {
+        $(this).addClass('act');
+    },function () {
+        $(this).removeClass('act');
+    })
+</script>

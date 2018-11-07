@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{$book.book_name}-{:config('queue.WebName')}</title>
+    <link rel="shortcut icon" href="__STATIC__/images/Favicon.ico" type="image/x-icon" />
+    <!--样式重置-->
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/rest.css" />
+    <!--头部样式-->
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/header.css"  />
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/header-small.css"  media="screen and (max-width: 1400px)"/>
+    <!--底部样式-->
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/footer.css" />
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/footer-small.css" media="screen and (max-width: 1400px)" />
+    <link rel="stylesheet" href="__STATIC__/css/read-menu.css">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/read-menu-small.css" media="screen and (max-width: 1400px)"/>
+    <!--引入jq-->
+    <script src="https://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+{include file="public/top"}
+
+<div class="read-menu oh">
+    <!-- 左侧目录栏信息 begin -->
+    <div class="read-left-wrap fl">
+        <p class="read-nav">
+            <a href="{:url('Index/index')}">首页</a>
+            &gt;
+            <a href="{:url('BookInfo/index',['bookid'=>$book.book_id])}">{$book.book_name}</a>
+        </p>
+
+        <div class="booksInfo">
+            <p class="bookTitle">{$book.book_name}</p>
+            <p class="oh bookUpdateInfo">
+                <span class="fl">小说作者：</span>
+                <a href="#" class="fl author">{$book.author_name}</a>
+                <span fl>更新时间：<?php echo date('Y-m-d H:i',strtotime($book['update_time'])) ?></span>
+
+            </p>
+            <!-- 排序方式? -->
+            <p class="sort "><a href="javascript:;" class="fr" >倒序<i></i></a></p>
+        </div>
+        <!-- 章节信息 BEGINI -->
+        <div class="chap-wrap">
+            {volist name="chapter" id="vo"}
+            <div class=" chapter-part">
+                <!-- 章节分券 -->
+                <p class="chapter-part-title"><span>{$book.book_name} {$vo.title}</span></p>
+                <ul class="chapter-list oh">
+                    {volist name="$vo.chapter" id="v"}
+                    <li class="fl">{if condition="$v.the_price neq 0"}<span class="VIP">VIP</span>{/if}<a href="javascript:;">{$v.title}</a></li>
+                    {/volist}
+
+                </ul>
+            </div>
+          {/volist}
+
+        </div>
+        <!-- 章节信息 end -->
+
+    </div>
+    <!-- 左侧目录栏信息 END-->
+    <!-- 右侧目录栏信息 begin-->
+    <div class="read-rightInfo fr">
+        <p class="book-celebrity"><span> 本书名人</span></p>
+        <!-- 滚动公告 -->
+        <div class="expentInfo-wrap">
+            <div class="expentInfo">
+                {volist name="exceptional" id="vo"}
+                <p><a href="javascript:;">【{$vo.pen_name}】</a>{$vo.dosomething}</p>
+                {/volist}
+            </div>
+        </div>
+        <!--滚动公告END-->
+        <!-- 打赏榜单信息 -->
+        <div class="reward-wrap ">
+            <div class="reward-user oh">
+                <div class="userInfo fl">
+                    <!--称号-->
+                    <span class="userTitle">票王</span>
+                    <p class="user-info">{$vipvote.pen_name}<span >·</span><span>VIP</span></p>
+                    <p class="user-level">经验等级：<span class="level">LV.{$vipvote.mem_vip}</span>{$vipvote.mem_vip|mem_vip}</p>
+                    <!--用户排名-->
+                    <p class="userlist">NO.1</p>
+                </div>
+                <div class="userImg fr">
+                    <img src="images/sd-menu-slice/user_icon_girl.png" alt="" />
+                </div>
+            </div>
+            <div class="reward-user oh mat">
+                <div class="userInfo fl">
+                    <!--称号-->
+                    <span class="userTitle">第一粉丝</span>
+                    <p class="user-info">{$vote.pen_name}<span >·</span><span>VIP</span></p>
+                    <p class="user-level">经验等级：<span class="level">LV.{$vote.mem_vip}</span>{$vote.mem_vip|mem_vip}</p>
+                    <!--用户排名-->
+                    <p class="userlist">NO.1</p>
+                </div>
+                <div class="userImg fr">
+                    <img src="images/sd-menu-slice/user_icon_boy.png" alt="" />
+                </div>
+            </div>
+        </div>
+        <!--铁杆粉丝 BEGIN-->
+        <div class="bookFans-wrap">
+            <div class="bookFans-title">铁杆粉丝榜</div>
+            <p class="bookFans oh fans-book">
+                <span class="num fl bookFans-num">1</span>
+                <img src="/Upload/upload_portrait/{$one.portrait}" alt=""  class="fl user-img"/>
+                <a href="" title="{$one.pen_name}"><span class="fl user-name">{$one.pen_name}</span></a>
+                <span class="recomTime fr times">{$one.fan_value}</span>
+            </p>
+            <p class="bookFans oh fans-book">
+                <span class="num fl bookFans-nums">2</span>
+                <img src="/Upload/upload_portrait/{$two.portrait}" alt=""  class="fl user-img"/>
+                <a href="" title="{$two.pen_name}"><span class="fl user-name">{$two.pen_name}</span></a>
+                <span class="recomTimes fr times">{$two.fan_value}</span>
+            </p>
+            {volist name="fan" id="vo" offset="2" }
+            <p class="bookFans oh fans-book split">
+                <span class="num fl bookFans-numss">{$a++}</span>
+                <a href="" title="{$vo.pen_name}"><span class="fl user-name">{$vo.pen_name}</span></a>
+                <span class="recomTimess fr times">{$vo.fan_value}</span>
+            </p>
+           {/volist}
+
+
+        </div>
+        <!--铁杆粉丝 END-->
+    </div>
+    <!-- 右侧目录栏信息 END-->
+
+</div>
+
+<!--底部BEGIN-->
+{include file="public/bot"}
+<!--底部END-->
+<!--书咚APP下载模块BEGIN-->
+<div class="app" id="js-app">
+    <img src="__STATIC__/images/app-log_03.png" alt="" />
+    <p class="app-code"><img src="__STATIC__/images/app.png"/></p>
+    <button class="app-btn">下载客户端</button>
+</div>
+<p class="sd-back" id="j-top"><img src="__STATIC__/images/home_btn_top.png" title="返回顶部哟" /></p>
+
+
+
+<script src="__STATIC__/js/sd-scroll.js" type="text/javascript" charset="utf-8"></script>
+<!--APP下载模块END-->
+<!--返回顶部BEGIN-->
+
+<script src="__STATIC__/js/sd-backTop.js" type="text/javascript" charset="utf-8"></script>
+<!--返回顶部END-->
+<script src="__STATIC__/js/scorll.js" type="text/javascript" charset="utf-8"></script>
+<script src="__STATIC__/js/sd-search.js" type="text/javascript" charset="utf-8"></script>
+<script src="__STATIC__/js/sd.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="__STATIC__/js/read/read-menu.js"></script>
+
+</body>
+
+
+</html>

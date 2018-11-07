@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{$book.book_name}-{:config('queue.WebName')}</title>
+    <!--样式重置-->
+    <!--样式重置-->
+    <link rel="shortcut icon" href="__STATIC__/images/Favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/rest.css" />
+    <!--头部样式-->
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/header.css"  />
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/header-small.css"  media="screen and (max-width: 1400px)"/>
+    <!--中间部分样式-->
+    <!--底部样式-->
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/footer.css" />
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/footer-small.css" media="screen and (max-width: 1400px)" />
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/container.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/container.css" media="screen and (max-width: 1400px)"/>
+    <link rel="stylesheet" href="__STATIC__/css/books.css" />
+    <link rel="stylesheet" href="__STATIC__/css/books-small.css" media="screen and (max-width: 1400px)" />
+    <link rel="stylesheet" href="__STATIC__/css/read-menu.css" />
+    <link rel="stylesheet" href="__STATIC__/css/read-menu.css"  media="screen and (max-width: 1400px)" />
+
+    <!--阅读介绍样式-->
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/read.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/read-small.css" media="screen and (max-width: 1400px)"/>
+    <!--引入jq-->
+    <script src="https://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+
+    <link href="https://cdn.bootcss.com/Swiper/3.4.0/css/swiper.css" rel="stylesheet">
+
+</head>
+<body>
+{include file="public/top"}
+<!--banner END-->
+<!--阅读详情页 BEGIN-->
+<div class="read-wrap oh">
+    <div class="wrap-left fl">
+        <!--阅读导航 begin-->
+        <p class="read-nav">
+            <a href="javascript:;">首页</a>
+            &gt;
+            <a href="javascript:;">{$book.book_name}</a>
+        </p>
+        <!--阅读导航 end-->
+        <!--书籍介绍 BEGIN-->
+        <div class="book-wraps">
+            <div class="sd-warp oh">
+                <div class="book-covers fl">
+                    <img src="/Upload/Book/zhong/{$book.upload_img}" alt="" />
+                </div>
+                <div class="books-info fl">
+                    <p class="title">{$book.book_name}</p>
+                    <p class="authorInfo">小说作者：
+                        <a href="#">{$book.author_name}</a>
+                        <span>更新时间：<?php echo date('Y-m-d H:i',strtotime($book['update_time'])) ?></span>
+                    </p>
+                    <!--标签-->
+                    <ol class="oh bookTags">
+                        {volist name="$book.keywords" id="vo"}
+                        <li class="fl"><a href="javascript:;">{$vo}</a></li>
+                        {/volist}
+                    </ol>
+                    <!--书籍状态-->
+                    <ul class="booksState oh">
+                        <li class="fl"><span  class="icon">◆ </span>总点击：{$book.click_total|num}</li>
+                        <li class="fl"><span  class="icon">◆ </span>总收藏：{$book.collection_total}</li>
+                        <li class="fl"><span  class="icon">◆ </span>总推荐：{$book.vote_total}</li>
+                        <li class="fl mat0"><span  class="icon">◆ </span>总字数：{$book.words|num}</li>
+                        <li class="fl"><span  class="icon">◆ </span>{$book.state==1? '连载中':'已完本'}</li>
+                        <li class="fl"><span  class="icon">◆ </span>{$book.cp_id==1? '本站首发':'他站首发'}</li>
+                        <li class="fl"><span  class="icon">◆ </span>{$book.vip? 'VIP作品':'免费作品'}</li>
+                        <li class="fl mat0"><span  class="icon">◆ </span>{$book.level? 'R18+':'G级'}</li>
+                    </ul>
+                    <!--功能按钮 begin-->
+                    <ul class="btn-action">
+                        <li class="fl current"><a href="{:url('Read/index',['bookid'=>$book.book_id,'num'=>1])}">点击阅读</a></li>
+                        <li class="fl"><a href="javascript:;">加入书架</a></li>
+                        <li class="fl"><a href="{:url('Chapterlist/index',['bookid'=>$book.book_id])}">章节目录</a></li>
+                        <li class="fl"><a href="javascript:;">订阅</a></li>
+                    </ul>
+                    <!--功能按钮 end -->
+                </div>
+            </div>
+            <p class="authTitle"><span>作品简介</span></p>
+            <div id="wrap">
+                <div class="book-detail">
+                    <p style="text-indent: 0.2em;">{$book.book_brief}</p>
+                </div>
+                <div id="scoll">
+                    <div id="bar"></div>
+                </div>
+                <!--提醒-->
+                <p class="reminder">（本站郑重提醒: 本故事纯属虚构，如有雷同，纯属巧合，切勿模仿。)</p>
+            </div>
+
+        </div>
+        <!--作者介绍-->
+        <div class="info oh">
+            <div class="author fl">
+                <p class="authImg">
+                    <img src="/Upload/upload_portrait/{$book.image}" alt=""  class="userImgs"/>
+                    <img src="__STATIC__/images/read/user_icon_boy.png" alt=""  class="userSex"/>
+                </p>
+                <a href="javascript:;"><p class="authorName">{$book.author_name}<span> {$book.is_vip?"·VIP":""}</span></p></a>
+              {if condition="$book.jibie neq 0"}
+                <p class="author-level">经验等级：LV.{$book.jibie}{$book.jibie|mem_vip}</p>
+                {else /}
+                <p class="author-level">经验等级：暂无</p>
+              {/if}
+                <span class="pertain">本书作者</span>
+            </div>
+            <!--其他作品  BEGIN-->
+            <div class="other-works fl">
+                <p class="other-works-title"><span>◆ </span>作者其他作品</p>
+                <!--作品展示-->
+                <div class="swiper-container">
+                    <div class="slider swiper-wrapper">
+                        <ul class="book-lists  swiper-slide">
+                         {if condition="$count neq 0"}
+                            {volist name="other" id="vo" }
+                            <li class="fl oh">
+                                <a href="{:url('Bookinfo/index',['bookid'=>$vo.book_id])}" class="fl">
+                                    <div class="books-cover">
+                                        <img src="/Upload/Book/zhong/{$vo.upload_img}" alt="" />
+                                    </div>
+                                </a>
+                                <div class="book-items-info fl">
+                                    <p class="books-title"><a href="#">{$vo.book_name}</a></p>
+                                    <span class="click-num">{$vo.words|num}</span>
+                                    <span class="classify">{$vo.book_type}</span>
+                                </div>
+                            </li>
+                            {/volist}
+                            {/if}
+                        </ul>
+
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+            <!--其他作品  END-->
+        </div>
+        <div class="chapter-lists oh" id="dao-and-zheng">
+            <p class="fl title"><span>章节列表</span></p>
+           <a href="javascript:daoxu();" class="fr sorts" id="daoxu">倒序<i></i></a>
+        </div>
+
+        <!--章节列表详情 begin-->
+        <div id="xu">
+        {if condition="$count1 lt '22'"}
+        <ul class="chapter-items oh">
+            {volist name="chapter" id="vo"}
+            <li class="fl oh"><a href="javascript:;" class="fl">{$vo.title}</a>
+                {if condition="$vo.the_price neq 0"}
+                <span class="vip fl">vip</span>
+                {/if}
+            </li>
+            {/volist}
+        </ul>
+        {else /}
+
+        <ul class="chapter-items oh" >
+
+            {volist name="chapter" id="vo"  offset="0" length="21"}
+            <li class="fl oh"><a href="javascript:;" class="fl">{$vo.title}</a>
+                {if condition="$vo.the_price neq 0"}
+                <span class="vip fl">vip</span>
+                {/if}
+            </li>
+            {/volist}
+            <p class="show-all" id="show-all"><a href="javascript:show();" style="color: red;">+显示全部章节</a></p>
+
+        </ul>
+
+        {/if}
+        </div>
+        <!--章节列表详情 end-->
+        <!--书评区-->
+        <div class="discuss"><p>书评区（共<span id="discussTotal">{$count2}</span>条精彩书评）</p></div>
+        <!--评论框 BEGIN-->
+     <div id="zhuijia">
+        <div class="dis-wrap">
+            <!--输入框 begin-->
+            <div class="input-field">
+                <textarea class="text-input txt" maxlength="140" placeholder="快来吐槽这本书吧，注意文明用语哦\^o^/"></textarea>
+                <!--发布按钮-->
+                <div class="oh"><div class="fr oh btn"><p class="fl count"><span id="J_counter" >0</span>/140</p><input class="fl btn-publish come-out" type="button" value="发表"></div></div>
+            </div>
+            <!--输入框 end-->
+            <!--评论列表 begin -->
+            <!--<ul class="dis-list"></ul>-->
+            <ul class="dis-list">
+
+
+        {volist name="$message.message" id="vo"}
+                <input type="hidden" name="current" id="current" value="{$current}"/>
+                <input type="hidden" id="bookid" value="{$bookid}"/>
+                <li>
+                    <div class="oh">
+                        <div class="user-img fl">
+                            <img src="/Upload/upload_portrait/{$vo.portrait}" class="userImg"/>
+                            <img src="images/read/user_icon_boy.png" alt="" class="sex"/>
+                        </div>
+                        <div class="user-infos fl">
+                            <p class="userName oh"><a href="javascript:;" class="fl">{$vo.pen_name}</a>{if condition="$vo.days neq 0"}<span class="VIP fl">• VIP</span>{/if}{if condition="$vo.is_author eq 1"}<span class="veritys fl">本书作者</span>{/if}</p>
+                            <span class="user-levels">经验等级：LV.{$vo.mem_vip}{$vo.mem_vip|mem_vip}</span>
+                            <p class="oh disc">{if condition="$vo.top eq 1"}<span class="stick fl">置顶</span>{/if}<span class="fl">{$vo.content}</span></p>
+                        </div>
+                    </div>
+                    <div class=" sd-infos">
+                        <span class="times fl"><?php echo date('Y-m-d H:i',strtotime($vo['time'])) ?></span>
+                        <div class="fr  btn-item">
+                            <p class="agree-assit fl"><span>赞</span>(<span class="assit">{$vo.thumb}</span>)</p>
+                            <p class="agree-reply fr">回复(<span class="reply ">{$vo.num}</span>)</p>
+                        </div>
+
+                        <div class="clearFix"></div>
+                        <!--回复区 begin -->
+                        <div class="replyItem input-field dn">
+
+                            <textarea name="" rows="" cols="" class="replayText text-input" maxlength="140" placeholder="回复这条书评："></textarea>
+                            <div class="oh"><div class="fr oh btn"><p class="fl count"><span id="J_counter">0</span>/140</p><button class="fl btn-publish btns">回复</button></div></div>
+                            <!--回复详情 begin-->
+                      {if condition="$vo.msg" neq null}
+                            <ul class="replyItems  replyItem-border">
+                               {volist name="$vo.msg" id="v"}
+                                <li class="oh item">
+                                    <p class="fl replayImg"><img src="/Upload/upload_portrait/{$v.portrait}" alt="" /></p>
+                                    <div class="replayUser fl">
+                                        <p class="userName oh"><a href="javascript:;" class="fl">{$v.pen_name}</a>{if condition="$v.days neq 0"}<span class="VIP fl">• VIP</span>{/if}{if condition="$v.is_author eq 1"}<span class="veritys fl">本书作者</span>{/if}<span class="replayTime fr times"><?php echo date('Y-m-d H:i',strtotime($v['time'])) ?></span></p>
+                                        <p class="replay-word oh disc">{if condition="$v.top eq 1"}<span class="stick fl">置顶</span>{/if}{$v.content}</p>
+                                    </div>
+                                </li>
+                               {/volist}
+                            </ul>
+
+                            {/if}
+                            <!--回复详情 end-->
+                        </div>
+                        <!--回复区 end -->
+                    </div>
+                </li>
+                {/volist}
+            </ul>
+            <!--评论列表 END-->
+
+        </div>
+
+
+        <!--分页按钮-->
+        <div class="oh">
+            <div class="book-page fr oh">
+                {if condition="$message.page gt 1"}
+                <ul class="bookNum fl">
+                    {if condition="$current neq 1"}
+                    <a href="javascript:pre_page1();"><li class="arrowLeft"></li></a>
+                    {/if}
+                    {if condition="$current-1 gt 0"}
+                    <a href="javascript:one_page();"><li>{$current-1}</li></a>
+                    {/if}
+                    <a href="javascript:;"><li class="current">{$current}</li></a>
+                    {if condition="$current+1 elt $message.page"}
+                    <a href="javascript:two_page();"><li>{$current+1}</li></a>
+                    {/if}
+                    {if condition="$current+1 elt $message.page"}
+                    <a href="javascript:next_page1();"><li class="arrowRight"></li></a>
+                    {/if}
+                </ul>
+               {/if}
+            </div>
+        </div>
+     </div>
+        <!--评论框 END-->
+        <!--同类作品 begin-->
+        <p class="similar-works"><span>同类作品</span></p>
+        <ul class=" sd-book-list ">
+         {volist name="bookType" id="vo"}
+            <a href="{:url('Bookinfo/index',['bookid'=>$vo.book_id])}">
+                <li class="fl ">
+                    <div class="book-cover">
+                        <img src="/Upload/Book/zhong/{$vo.upload_img}" alt="{$vo.book_name}">
+                        <!--书籍遮罩BEGIN-->
+                        <div class="book-cover-mask">
+                            <!--作品信息BEGIN-->
+                            <div class="sd-works">
+                                <p class="book-works">
+                                    <i></i>
+                                    <span class="sd-author-name">{$vo.author_name}</span>
+                                </p>
+                                <p class="book-intr" style="overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 5;">
+                                    {$vo.book_brief}
+                                </p>
+                                <span>{$vo.level|level}</span>
+                            </div>
+                            <!--作品信息END-->
+                        </div>
+                        <!--书籍遮罩END-->
+                    </div>
+                    <p class="book-title">{$vo.book_name}</p>
+                    <p class="oh sd-book-info">
+                        <span class="book-price fl">{$vo.words|num}</span>
+                        <span class="fl sd-bor"></span>
+                        <span class="book-sort fl"> {$vo.book_type}</span>
+                    </p>
+                </li>
+            </a>
+      {/volist}
+
+        </ul>
+        <!--其他作品 begin-->
+    </div>
+    <div class="wrap-right fr">
+        <div class="wrapRight">
+            <p class="skillTitle">支持作品</p>
+            <!--技能标签-->
+            <ul class="skill-tags oh">
+                <li class="fl odd tag-act"><a href="">辣条</a></li>
+                <li class="fl even"><a href="">咸鱼</a></li>
+                <li class="fl odd"><a href="">肥皂</a></li>
+                <li class="fl even"><a href="">狗粮</a></li>
+                <li class="fl odd"><a href="">魔兽</a></li>
+                <li class="fl even"><a href="">萝莉</a></li>
+            </ul>
+            <!--打赏按钮-->
+            <button class="play-tour">打赏么么哒~~</button>
+            <!--投票区-->
+            <div class="vote-item">
+                <ul class="oh vote-total">
+                    <li class="fl">
+                        <p class="vote-num"> {$vote}</p>
+                        <p>推荐</p>
+                    </li>
+                    <li class="fl">
+                        <p class="vote-num">{$votevip}</p>
+                        <p>月票</p>
+                    </li>
+                </ul>
+                <button class="vote-btn">投他一票~~</button>
+            </div>
+
+        </div>
+        <!--本书名人-->
+
+        <p class="celebrity-part"><span class="celebrityTitle">本书名人</span></p>
+        <!--//滚动公告-->
+        <div class="scroll-notice">
+            <ul class="notice-item">
+                {volist name="exceptional" id="vo"}
+                <li><a href="javascript:;"><span class="userItem">【{$vo.pen_name}】</span>刚刚{$vo.dosomething}</a></li>
+                {/volist}
+            </ul>
+            <!--票王区-->
+        </div>
+        <div class="reward-wrap ">
+            <div class="reward-user oh reuser">
+                <div class="userInfo fl">
+                    <!--称号-->
+                    <span class="userTitle">票王</span>
+                    {if condition="$voteone neq 0"}
+                    <p class="user-info">{$voteone.pen_name}{if condition="$voteone.days gt 0"}<span>·</span><span>VIP</span>{/if}</p>
+                    <p class="user-level">经验等级：<span class="level">LV.{$voteone.mem_vip}</span>{$voteone.mem_vip|mem_vip}</p
+                    <p class="userlist">NO.1</p>
+                    {else /}
+                    <p class="user-info">暂无数据</p>
+                    {/if}
+                </div>
+                <div class="userImg fr">
+                    <img src="__STATIC__/images/sd-menu-slice/user_icon_girl.png" alt="">
+                </div>
+            </div>
+            <div class="reward-user oh mat tacket">
+                <div class="userInfo fl">
+                    <span class="userTitle">第一粉丝</span>
+                    {if condition="$fans neq 0"}
+                    <p class="user-info">{$fans.pen_name}{if condition="$fans.days gt 0"}<span>·</span><span>VIP</span>{/if}</p>
+                    <p class="user-level">经验等级：<span class="level">LV.{$fans.mem_vip}</span>{$fans.mem_vip|mem_vip}</p>
+                    <!--用户排名-->
+                    <p class="userlist">NO.1</p>
+                    {else /}
+                    <p class="user-info">暂无数据</p>
+
+                    {/if}
+                </div>
+                <div class="userImg fr">
+                    <img src="__STATIC__/images/sd-menu-slice/user_icon_boy.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="bookFans-wrap">
+            <div class="bookFans-title">铁杆粉丝榜</div>
+            {if condition="$fan[0] neq null"}
+            <p class="bookFans oh fans-book">
+                <span class="num fl bookFans-num">1</span>
+                <img src="/Upload/upload_portrait/{$fan[0]['portrait']}" alt="" class="fl user-img">
+                <a href="javascript:;" title="{$fan[0]['pen_name']}"><span class="fl user-name">{$fan[0]['pen_name']}</span></a>
+                <span class="recomTime fr times">{$fan[0]['fan_value']}</span>
+            </p>
+            {/if}
+            {if condition="$fan[1] neq null"}
+            <p class="bookFans oh fans-book">
+                <span class="num fl bookFans-nums">2</span>
+                <img src="/Upload/upload_portrait/{$fan[1]['portrait']}" alt="" class="fl user-img">
+                <a href="javascript:;"><span class="fl user-name">{$fan[1]['pen_name']}</span></a>
+                <span class="recomTimes fr times">{$fan[1]['fan_value']}</span>
+            </p>
+            {/if}
+            {if condition="$fan[2] neq null"}
+            <p class="bookFans oh fans-book split">
+                <span class="num fl bookFans-numss">3</span>
+                <img src="/Upload/upload_portrait/{$fan[2]['portrait']}" alt="" class="fl user-img">
+                <a href="javascript:;"><span class="fl user-name">{$fan[2]['pen_name']}</span></a>
+                <span class="recomTimess fr times">{$fan[2]['fan_value']}</span>
+            </p>
+            {/if}
+           {volist name="fan" id="vo" offset="3" length="17"}
+            <p class="bookFans oh fans-book col-mat">
+                <span class="num fl ">{$a++}</span>
+                <a href="javascript:;"><span class="fl user-name">{$vo.pen_name}</span></a>
+                <span class=" fr times">{$vo.fan_value}</span>
+            </p>
+             {/volist}
+
+        </div>
+    </div>
+</div>
+<!--阅读详情页 END-->
+
+<!--底部BEGIN-->
+{include file="public/bot"}
+<!--底部END-->
+<!--书咚APP下载模块BEGIN-->
+<div class="app" id="js-app">
+    <img src="__STATIC__/images/app-log_03.png" alt="" />
+    <p class="app-code"><img src="__STATIC__/images/app.png"/></p>
+    <button class="app-btn">下载客户端</button>
+</div>
+<p class="sd-back" id="j-top"><img src="__STATIC__/images/home_btn_top.png" title="返回顶部哟" /></p>
+<script type="text/javascript" src="__STATIC__/js/clamp.js"></script>
+<script src="__STATIC__/js/sd-scroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="__STATIC__/js/sd-backTop.js" type="text/javascript" charset="utf-8"></script>
+<!--返回顶部END-->
+<script src="__STATIC__/js/scorll.js" type="text/javascript" charset="utf-8"></script>
+<script src="__STATIC__/js/sd-search.js" type="text/javascript" charset="utf-8"></script>
+<script src="__STATIC__/js/sd.js" type="text/javascript" charset="utf-8"></script>
+<script src="__STATIC__/js/book-page/scroll.js"></script>
+<script src="js/book-page/items.js"></script>
+
+<script src="__STATIC__/js/book-page/chapter.js"></script>
+<script src="__STATIC__/js/page1.js"></script>
+<script src="__STATIC__/js/book-page/btn-publish.js" type="text/javascript" charset="utf-8"></script>
+<script src="__STATIC__/js/book-page/page.js" type="text/javascript" charset="utf-8"></script>
+<script src="__STATIC__/js/book-page/slide-notice.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdn.bootcss.com/Swiper/3.4.0/js/swiper.min.js"></script>
+<script src="__STATIC__/js/book-page/sliders.js" type="text/javascript" charset="utf-8"></script>
+<script src="__STATIC__/js/book-page/data-none.js"></script>
+</body>
+</html>

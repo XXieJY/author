@@ -1,0 +1,32 @@
+<div class="listItem-book oh">
+    <div class="bookInfo fl">
+        <span class="book-num">NO.1</span>
+        <p class="bookTitle"><a href="{:url('/index/Bookinfo/index',['bookid'=>$tongren[0]['book_id']])}" title="{$tongren[0]['book_name']}">{$tongren[0]['book_name']}</a></p>
+        <a href="javascript:;" class="bookAuthor">{$tongren[0]['author_name']}</a>
+        <p class="bookClick"><span>{$tongren[0]['click_month']|num}</span>点击</p>
+    </div>
+    <a href="{:url('/index/Bookinfo/index',['bookid'=>$tongren[0]['book_id']])}" title="{$tongren[0]['book_name']}">
+        <img src="/Upload/Book/zhong/{$tongren[0]['upload_img']}" alt="$tongren[0]['book_name']" class="fl">
+    </a>
+</div>
+<!-- 0书籍详情 END -->
+<div class="book-infos oh">
+    <span class="bookNum fl num-icon">2</span>
+    <span class="items-book fl">[{$tongren[1]['book_type']}]</span>
+    <span class="book-title fl"><a href="{:url('/index/Bookinfo/index',['bookid'=>$tongren[1]['book_id']])}" title="{$tongren[1]['book_name']}">{$tongren[1]['book_name']}</a></span>
+    <span class="book-click fr num-icons">{$tongren[1]['click_month']|num}</span>
+</div>
+<div class="book-infos oh">
+    <span class="bookNum fl numIcon">3</span>
+    <span class="items-book fl">[{$tongren[2]['book_type']}]</span>
+    <span class="book-title fl "><a href="{:url('/index/Bookinfo/index',['bookid'=>$tongren[2]['book_id']])}" title="{$tongren[2]['book_name']}">{$tongren[2]['book_name']}</a></span>
+    <span class="book-click fr numIcons">{$tongren[2]['click_month']|num}</span>
+</div>
+{volist name="tongren" id="vo" offset="3" length="7"}
+<div class="book-infos oh">
+    <span class="bookNum fl">{$h++}</span>
+    <span class="items-book fl">[{$vo.book_type}]</span>
+    <span class="book-title fl"><a href="{:url('/index/Bookinfo/index',['bookid'=>$vo.book_id])}" title="{$vo.book_name}">{$vo.book_name}</a></span>
+    <span class="book-click fr">{$vo.click_month|num}</span>
+</div>
+{/volist}

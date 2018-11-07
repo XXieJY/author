@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{$title}-书咚网</title>
+    <link rel="shortcut icon" href="__STATIC__/images/Favicon.ico" type="image/x-icon" />
+
+    <!--样式重置-->
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/rest.css" />
+    <!--头部样式-->
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/header.css"  />
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/header-small.css"  media="screen and (max-width: 1400px)"/>
+    <!--底部样式-->
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/footer.css" />
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/footer-small.css" media="screen and (max-width: 1400px)" />
+    <!--轮播图样式-->
+    <link rel="stylesheet" href="__STATIC__/css/slider.css" />
+    <link rel="stylesheet" href="__STATIC__/css/slider-small.css" media="screen and (max-width: 1400px)" />
+    <!--排行样式-->
+    <link rel="stylesheet" href="__STATIC__/css/list.css">
+    <link rel="stylesheet" href="__STATIC__/css/list-small.css" media="screen and (max-width: 1400px)">
+    <link rel="stylesheet" href="__STATIC__/css/click-list.css">
+    <link rel="stylesheet" href="__STATIC__/css/click-list-small.css" media="screen and (max-width: 1400px)">
+    <!--引入jq-->
+    <script src="https://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+{include file="public/top"}
+<!--banner END-->
+<!-- 各类排行区 BEGIN-->
+<div class="list-wrap oh">
+    <!-- 排行分类  BEGIN-->
+   {include file="public/list"}
+        <!--//点击榜-->
+    <div class="click-wrap fl" id="weeks">
+        <div class="clicklistDetail list-item active">
+            <ul class="clicklist-title oh clicks">
+                {if condition="$xin eq 'abc'"}
+                <li class="f1" style="border-right: 0px solid #999999">月榜</li>
+                {elseif condition="$xin eq 'ab'" /}
+                <li class="fl"><a href="javascript:month();">月榜</a></li>
+                <li class="fl"><a href="javascript:total();">总榜</a></li>
+                {elseif condition="$xin eq 'a'" /}
+                <li class="fl" style="border-right: 0px solid #999999">总榜</li>
+                {else /}
+                <li class="fl clicklist-act"><a href="javascript:weeks();">周榜</a></li>
+                <li class="fl"><a href="javascript:month();">月榜</a></li>
+                <li class="fl"><a href="javascript:total();">总榜</a></li>
+                {/if}
+            </ul>
+            <div id="zhuijia">
+            {volist name="weeks" id="vo"}
+                <input type="hidden" name="bang" id="bang"  value="{$bang}" />
+                <input type="hidden" name="bangs" id="bangs"  value="{$bangs}" />
+                <input type="hidden" name="type" id="type"  value="{$type}" />
+                <input type="hidden" name="p" id="p"  value="{$p}" />
+            <div class="list-show show">
+                <div class="bookDetails oh">
+                    <p class="bookListNum fl">{$a++}</p>
+                    <img src="/Upload/Book/zhong/{$vo.upload_img}" alt="{$vo.book_name}" class="fl booklist-cover">
+                    <div class="booklist-info fl">
+                        <p class="book-title " >{$vo.book_name}</p>
+                        <p class="oh booksInfo">
+                            <span class="fl">小说作者：</span><span class="fl author">{$vo.author_name}</span>
+                            最近更新：<?php echo date('Y-m-d H:i',strtotime($vo['time'])) ?>/  <span>{$vo.title|newtitle}</span>
+                        </p>
+                        <p  class="chapterInfo">
+                          {$vo.book_brief}
+                        </p>
+                    </div>
+                    <ul class="fl btn-cell">
+                        <li class="read-cell"><a href="{:url('Bookinfo/index',['bookid'=>$vo.book_id])}">点击阅读</a></li>
+                        <li><a href="#">加入书架</a></li>
+                        <li><a href="#">投推荐票</a></li>
+                    </ul>
+                </div>
+            </div>
+            {/volist}
+            </div>
+        </div>
+       <input type="hidden" id="current" name="current" value="{$current}">
+        <div class="book-page fr oh">
+            <ul class="bookNum fl">
+                {if condition="$current gt 1"}
+                <a href="javascript:pre_page();"><li class="arrowLeft"></li></a>
+                {/if}
+                {if condition="$current+3 elt $page"}
+                <a href="javascript:cur_current();"><li class="current">{$current}</li></a>
+                <a href="javascript:current_one();"><li>{$current+1}</li></a>
+                <a href="javascript:current_two();"><li>{$current+2}</li></a>
+                <a href="javascript:current_three();"> <li>{$current+3}</li></a>
+                {elseif condition="$current+2 elt $page"}
+                <a href="javascript:one_current();"><li class="">{$current-1}</li></a>
+                <a href="javascript:cur_current();"><li class="current">{$current}</li></a>
+                <a href="javascript:current_one();"><li>{$current+1}</li></a>
+                <a href="javascript:current_two();"> <li>{$current+2}</li></a>
+                {elseif condition="$current+1 elt $page"}
+                <a href="javascript:two_current();"><li class="">{$current-2}</li></a>
+                <a href="javascript:one_current();"><li>{$current-1}</li></a>
+                <a href="javascript:cur_current();"><li class="current">{$current}</li></a>
+                <a href="javascript:current_one();"> <li>{$current+1}</li></a>
+                {elseif condition="$current elt $page"}
+                <a href="javascript:three_current();"><li class="">{$current-3}</li></a>
+                <a href="javascript:two_current();"><li>{$current-2}</li></a>
+                <a href="javascript:one_current();"><li>{$current-1}</li></a>
+                <a href="javascript:cur_current();"> <li class="current">{$current}</li></a>
+               {/if}
+                {if condition="$current lt $page"}
+                <a href="javascript:next_page();"><li class="arrowRight"></li></a>
+                {/if}
+            </ul>
+            <form method="post" action="" class="f1">
+            <p class="book-take oh fl">
+                <span class="fl">跳转</span>
+                <input type="text" class="fl" name="jump" value="">
+                <span class="fl">/{$page}页</span>
+                <input type="submit" class="f1 confirm" value="确认" style="width: 40px;"/>
+            </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- 金主榜  begin-->
+
+    <div class="metal-list fl">
+        <!-- 标题部份 -->
+        <div class="metal-list-nav">
+            <span class="fl">金主榜</span>
+            <ul class="metal fr">
+                <li class="current fl"><a href="javascript:jinzhu_weeks();">周</a></li>
+                <li class="fl"><a href="javascript:jinzhu_month();">月</a></li>
+                <li class="fl"><a href="javascript:jinzhu_total();">总</a></li>
+            </ul>
+        </div>
+        <!-- 金主简介 -->
+        <ul class="user-info">
+            <li class="show" id="jinzhu">
+                {volist name="jinzhu" id="vo"}
+                <div class="metal-listDetail oh">
+                    <span class="fl metal-num color-f4">{$b++}</span>
+                    <span class="metal-img fl"><img src="/Upload/upload_portrait/{$vo.portrait}"/></span>
+                    <span class="reader-name fl"><a href="javascript:;">{$vo.pen_name}</a></span>
+                    <span class="reader-reward fr color-f4s">{$vo.money}</span>
+                </div>
+                {/volist}
+            </li>
+        </ul>
+
+
+    </div>
+    <!-- 金主榜  end-->
+
+
+</div>
+<!--底部BEGIN-->
+{include file="public/bot"}
+<!--底部END-->
+<!--书咚APP下载模块BEGIN-->
+<div class="app" id="js-app">
+    <img src="__STATIC__/images/app-log_03.png" alt="" />
+    <p class="app-code"><img src="__STATIC__/images/app.png" /></p>
+    <button class="app-btn">下载客户端</button>
+</div>
+<p class="sd-back" id="j-top"><img src="__STATIC__/images/home_btn_top.png" title="返回顶部哟" /></p>
+<script type="text/javascript" src="__STATIC__/js/clamp.js"></script>
+<script src="__STATIC__/js/sd-scroll.js" type="text/javascript" charset="utf-8"></script>
+<!--APP下载模块END-->
+<!--返回顶部BEGIN-->
+<script src="__STATIC__/js/sd-backTop.js" type="text/javascript" charset="utf-8"></script>
+<!--返回顶部END-->
+<script src="__STATIC__/js/scorll.js" type="text/javascript" charset="utf-8"></script>
+<script src="__STATIC__/js/sd-search.js" type="text/javascript" charset="utf-8"></script>
+<script src="__STATIC__/js/sd.js" type="text/javascript" charset="utf-8"></script>
+<script src="__STATIC__/js/sd-selectcolor.js"></script>
+
+<script type="text/javascript" src="__STATIC__/js/list/click-list.js"></script>
+<script type="text/javascript" src="__STATIC__/js/page.js"></script>
+<script type="text/javascript" src="__STATIC__/js/bang.js"></script>
+</body>
+</html>

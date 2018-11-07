@@ -1,0 +1,100 @@
+<div class="topNav">
+    <div class="wrapper">
+        <!--登录注册 DEGIN-->
+        <a href="javascript:;" class="qq-login fl topNav-in" id="sd-login">登录</a>
+        <b class="fl topNav-in">|</b>
+        <a href="#" class="register fl topNav-in" id="sd-register">注册</a>
+        <!--登录注册 END-->
+        <!--充值 作者后台 APP下载 BEGIN -->
+        <p class="fr sd-right-part ">
+            <a href="#" class="pay topNav-in oh fl">
+                <i class="fl"></i>
+                <span class="fl">充值</span>
+            </a>
+            <b class="fl topNav-in ">|</b>
+            <a href="#" class="au-stage topNav-in oh fl">
+                <i class="fl"></i>
+                <span class="fl">作者后台</span>
+            </a>
+            <a href="#" class="code fl">
+                <i></i>
+                <span class="sd-app">
+		  				<img src="__STATIC__/images/app.png"/>
+							<span>扫码下载手机端</span>
+		  			</span>
+            </a>
+            <!--充值 作者后台 APP下载 END -->
+        </p>
+    </div>
+</div>
+<!--	</div>-->
+<!--导航栏 END-->
+<!--banner BEGIN-->
+<div class="banner">
+    <!--logo BEGIN-->
+    <div class="sd-logo ">
+        <img src="__STATIC__/images/home_shuddd_logo.png" class="fl" />
+        <p class="sd-info fl">泛次元小说互动平台</p>
+    </div>
+    <!--logo END-->
+    <!--分类导航栏BEGIN-->
+    <div class="subnav">
+        <div class="sd-center">
+            <ul class="sd-center-subnav fl">
+                {if condition="$ok eq 1"}
+                <li class="fl"><a href="{:url('Index/index')}" class="current">首页</a></li>
+                <li class="fl"><a href="{:url('Ranking/index')}">排行</a></li>
+                <li class="fl sd-circle"><a href="{:url('Curbook/index')}">宅圈</a></li>
+                <li class="fl sd-same"><a href="{:url('Tongren/index')}">同人</a></li>
+                <li class="fl"><a href="{:url('Book/index',['type'=>0,'key'=>0,'rank'=>0,'time'=>0,'words'=>0,'state'=>0])}">书库</a></li>
+                <li class="fl"><a href="community.html">社区</a></li>
+                {elseif condition="$ok eq 2"}
+                <li class="fl"><a href="{:url('Index/index')}" >首页</a></li>
+                <li class="fl"><a href="{:url('Ranking/index')}">排行</a></li>
+                <li class="fl sd-circle"><a href="{:url('Curbook/index')}">宅圈</a></li>
+                <li class="fl sd-same"><a href="{:url('Tongren/index')}" class="current">同人</a></li>
+                <li class="fl"><a href="{:url('Book/index',['type'=>0,'key'=>0,'rank'=>0,'time'=>0,'words'=>0,'state'=>0])}">书库</a></li>
+                <li class="fl"><a href="community.html">社区</a></li>
+                {elseif condition="$ok eq 3"}
+                <li class="fl"><a href="{:url('Index/index')}" >首页</a></li>
+                <li class="fl"><a href="{:url('Ranking/index')}">排行</a></li>
+                <li class="fl sd-circle"><a href="{:url('Curbook/index')}" class="current">宅圈</a></li>
+                <li class="fl sd-same"><a href="{:url('Tongren/index')}" >同人</a></li>
+                <li class="fl"><a href="{:url('Book/index',['type'=>0,'key'=>0,'rank'=>0,'time'=>0,'words'=>0,'state'=>0])}">书库</a></li>
+                <li class="fl"><a href="community.html">社区</a></li>
+                {elseif condition="$ok eq 4"}
+                <li class="fl"><a href="{:url('Index/index')}" >首页</a></li>
+                <li class="fl"><a href="{:url('Ranking/index')}" class="current">排行</a></li>
+                <li class="fl sd-circle"><a href="{:url('Curbook/index')}" >宅圈</a></li>
+                <li class="fl sd-same"><a href="{:url('Tongren/index')}" >同人</a></li>
+                <li class="fl"><a href="{:url('Book/index',['type'=>0,'key'=>0,'rank'=>0,'time'=>0,'words'=>0,'state'=>0])}">书库</a></li>
+                <li class="fl"><a href="community.html">社区</a></li>
+                {elseif condition="$ok eq 5"}
+                <li class="fl"><a href="{:url('Index/index')}" >首页</a></li>
+                <li class="fl"><a href="{:url('Ranking/index')}" >排行</a></li>
+                <li class="fl sd-circle"><a href="{:url('Curbook/index')}" >宅圈</a></li>
+                <li class="fl sd-same"><a href="{:url('Tongren/index')}" >同人</a></li>
+                <li class="fl"><a href="{:url('Book/index',['type'=>0,'key'=>0,'rank'=>0,'time'=>0,'words'=>0,'state'=>0])}" class="current">书库</a></li>
+                <li class="fl"><a href="community.html">社区</a></li>
+                {else /}
+                <li class="fl"><a href="{:url('Index/index')}" >首页</a></li>
+                <li class="fl"><a href="{:url('Ranking/index')}" >排行</a></li>
+                <li class="fl sd-circle"><a href="{:url('Curbook/index')}" >宅圈</a></li>
+                <li class="fl sd-same"><a href="{:url('Tongren/index')}" >同人</a></li>
+                <li class="fl"><a href="{:url('Book/index',['type'=>0,'key'=>0,'rank'=>0,'time'=>0,'words'=>0,'state'=>0])}">书库</a></li>
+                <li class="fl"><a href="community.html">社区</a></li>
+                {/if}
+
+            </ul>
+            <!--搜索功能 BEGIN-->
+            <form class="sd-search fr" method="get" action="{:url('Book/index',['type'=>0,'key'=>0,'rank'=>0,'time'=>0,'words'=>0,'state'=>0])}">
+                <input type="text" name="book_name"  value="" placeholder="搜索作品或者更多作者" placeholder="" class="fl sd-search-text" />
+
+                <input type="submit" value="" style="background: url('__STATIC__/images/reader_btn_search.png');width: 20px;" >
+                <div class="sd-search-result">
+                </div>
+            </form>
+            <!--搜索功能 END-->
+        </div>
+    </div>
+</div>

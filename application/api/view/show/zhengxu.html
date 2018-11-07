@@ -1,0 +1,26 @@
+{if condition="$count lt '22'"}
+<ul class="chapter-items oh">
+    {volist name="chapter" id="vo"}
+    <li class="fl oh"><a href="javascript:;" class="fl">{$vo.title}</a>
+        {if condition="$vo.the_price neq 0"}
+        <span class="vip fl">vip</span>
+        {/if}
+    </li>
+    {/volist}
+</ul>
+{else /}
+
+<ul class="chapter-items oh" >
+
+    {volist name="chapter" id="vo"  offset="0" length="21"}
+    <li class="fl oh"><a href="javascript:;" class="fl">{$vo.title}</a>
+        {if condition="$vo.the_price neq 0"}
+        <span class="vip fl">vip</span>
+        {/if}
+    </li>
+    {/volist}
+    <p class="show-all" id="show-all"><a href="javascript:show();" style="color: red;">+显示全部章节</a></p>
+
+</ul>
+
+{/if}

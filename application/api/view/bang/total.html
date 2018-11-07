@@ -1,0 +1,26 @@
+{volist name="weeks" id="vo"}
+<input type="hidden" name="bang" id="bang"  value="{$bang}" />
+<input type="hidden" name="bangs" id="bangs"  value="{$bangs}" />
+<input type="hidden" name="type" id="type"  value="{$type}" />
+<div class="list-show show">
+    <div class="bookDetails oh">
+        <p class="bookListNum fl">{$a++}</p>
+        <img src="/Upload/Book/zhong/{$vo.upload_img}" alt="{$vo.book_name}" class="fl booklist-cover">
+        <div class="booklist-info fl">
+            <p class="book-title " >{$vo.book_name}</p>
+            <p class="oh booksInfo">
+                <span class="fl">小说作者：</span><span class="fl author">{$vo.author_name}</span>
+                最近更新：<?php echo date('Y-m-d H:i',strtotime($vo['time'])) ?>/  <span>{$vo.title|newtitle}</span>
+            </p>
+            <p  class="chapterInfo">
+                {$vo.book_brief|book_brief}
+            </p>
+        </div>
+        <ul class="fl btn-cell">
+            <li class="read-cell"><a href="{:url('/index/Bookinfo/index',['bookid'=>$vo.book_id])}">点击阅读</a></li>
+            <li><a href="#">加入书架</a></li>
+            <li><a href="#">投推荐票</a></li>
+        </ul>
+    </div>
+</div>
+{/volist}
